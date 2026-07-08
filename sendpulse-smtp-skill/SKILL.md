@@ -9,7 +9,7 @@ description: >
   "SendPulse webhooks". Covers OAuth authorization, sending endpoints, sender/domain
   setup, error troubleshooting, deliverability best practices, and the difference
   between SMTP (transactional) and Email Service (marketing campaigns).
-version: 1.1.0
+version: 1.2.0
 license: MIT
 metadata:
   author: SendPulse
@@ -85,6 +85,12 @@ HTTP 401 — do **not** request a new token per email.
 
 Never hardcode keys or `client_id`/`client_secret` in code you generate — read them
 from environment variables or a secrets manager.
+
+**SendPulse MCP server** (`https://mcp.sendpulse.com/mcp`): for interactive
+account work from an AI chat (checking senders, stats, the unsubscribe list) the
+user can connect the hosted MCP server instead of writing one-off scripts. It does
+NOT replace the API/relay integration inside the user's application — see
+`references/sendpulse-mcp.md` for what it's good for and the setup.
 
 ## Step 3 — Send
 

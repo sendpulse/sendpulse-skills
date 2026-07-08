@@ -11,7 +11,7 @@ description: >
   SendPulse API (https://sendpulse.com/integrations/api/bulk-email). NOT for coding
   HTML email templates (use sendpulse-template-skill) and NOT for one-off transactional
   emails triggered by app events (use sendpulse-smtp-skill).
-version: 1.0.0
+version: 1.1.0
 license: MIT
 metadata:
   author: SendPulse
@@ -49,7 +49,14 @@ Adjacent SendPulse products to mention (pointer only, not covered here): Automat
 360 (triggered flows), subscription forms, Email Verifier (validate old lists before
 sending), CRM.
 
-## Step 1 — Authorize
+## Step 1 — Pick the channel and authorize
+
+**MCP first, when available.** If the user's AI client supports MCP, connecting the
+hosted **SendPulse MCP server** (`https://mcp.sendpulse.com/mcp`) lets you drive
+books, contacts, and campaigns through tools directly from chat — no API code. Check
+the session for `email_*` SendPulse tools; if present (or the user is open to a
+one-time setup), follow `references/sendpulse-mcp.md`. For apps/integrations that
+run on their own, use the REST API below.
 
 Base URL: `https://api.sendpulse.com`. Two options; **prefer the Single API Key**:
 

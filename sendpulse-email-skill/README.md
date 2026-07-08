@@ -23,6 +23,9 @@ the SMTP skill. Install all three for full coverage.
 
 - **Correct API usage** — Single API Key auth, the Base64-`body` gotcha, campaign
   schema, the odd blacklist format, pagination, rate limits (4 campaigns/hour).
+- **SendPulse MCP server** — chat-driven campaign management through MCP tools
+  (`mcp.sendpulse.com/mcp`) when the user's AI client supports it, with a
+  confirm-before-send safety rule.
 - **The campaign lifecycle** — book → subscribers → segment → campaign → review →
   sent → analytics, including honest expectations about campaign review for new
   accounts.
@@ -50,6 +53,7 @@ references/
   errors.md                    # troubleshooting order, campaign status decoder
   webhooks.md                  # real-time events
   list-building.md             # opt-in growth & hygiene
+  sendpulse-mcp.md             # SendPulse MCP server: chat-driven campaign work
 examples/
   curl.md · php.md · python.md · nodejs.md
 adapters/                      # install instructions per AI platform

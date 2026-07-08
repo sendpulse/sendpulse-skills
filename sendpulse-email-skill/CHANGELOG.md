@@ -4,6 +4,18 @@ All notable changes to the SendPulse Email Service Skill. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning follows
 [SemVer](https://semver.org/).
 
+## [1.1.0] — 2026-07-08
+
+### Added
+
+- **SendPulse MCP server support** (`references/sendpulse-mcp.md`): the hosted MCP
+  server at `https://mcp.sendpulse.com/mcp` as the preferred channel for
+  interactive, chat-driven campaign work (books, contacts, campaigns via tools —
+  no API code); REST API remains the path for standalone apps/integrations.
+  Includes connection setup (Single API Key), runtime tool discovery
+  (`email_*` tools), the confirm-before-send safety rule, and fallbacks.
+  SKILL.md Step 1 renamed to "Pick the channel and authorize".
+
 ## [1.0.0] — 2026-07-06
 
 ### Added

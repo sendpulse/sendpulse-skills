@@ -4,6 +4,17 @@ All notable changes to the SendPulse SMTP Skill. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning follows
 [SemVer](https://semver.org/).
 
+## [1.2.0] — 2026-07-08
+
+### Added
+
+- **SendPulse MCP server reference** (`references/sendpulse-mcp.md`): what the
+  hosted MCP server (`https://mcp.sendpulse.com/mcp`) is, how to connect (Single
+  API Key), and — importantly — correct expectations: MCP is for interactive
+  account work from AI chat (senders, stats, unsubscribe list); it does not
+  replace the API/relay integration inside the user's application. Mentioned in
+  SKILL.md Step 2.
+
 ## [1.1.0] — 2026-07-06
 
 ### Changed

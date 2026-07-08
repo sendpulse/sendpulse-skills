@@ -32,6 +32,7 @@ references/
   webhooks.md                  # real-time events
   smtp-relay.md                # smtp-pulse.com relay (PHPMailer, nodemailer, …)
   email-service-api.md         # campaigns/address books — when SMTP is wrong
+  sendpulse-mcp.md             # SendPulse MCP server: interactive account work from AI chat
 examples/
   curl.md · php.md · python.md · nodejs.md
 adapters/                      # install instructions per AI platform
