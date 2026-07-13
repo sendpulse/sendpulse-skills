@@ -11,8 +11,8 @@ analytics — via the dashboard and the
 
 | Skill | Owns |
 |---|---|
-| [`sendpulse-template-skill`](https://github.com/sendpulse/sendpulse-template-skill) | The email itself: HTML layout, copy, subject lines, template upload |
-| [`sendpulse-smtp-skill`](https://github.com/sendpulse/sendpulse-smtp-skill) | Transactional email: one message per app event via SMTP API/relay |
+| [`sendpulse-template-skill`](https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-template-skill) | The email itself: HTML layout, copy, subject lines, template upload |
+| [`sendpulse-smtp-skill`](https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-smtp-skill) | Transactional email: one message per app event via SMTP API/relay |
 | **`sendpulse-email-skill`** (this) | Everything around the campaign: lists, subscribers, segments, sending, analytics |
 
 The skills cross-reference instead of duplicating: this skill never writes email
@@ -62,10 +62,12 @@ VERSION · CHANGELOG.md
 
 ## Install
 
-**Claude Code / Claude Desktop:**
+**Claude Code / Claude Desktop** (the skill lives in the `sendpulse-skills`
+monorepo — clone once, copy or symlink the skill folder):
 
 ```bash
-git clone https://github.com/sendpulse/sendpulse-email-skill ~/.claude/skills/sendpulse-email-skill
+git clone https://github.com/sendpulse/sendpulse-skills
+cp -r sendpulse-skills/sendpulse-email-skill ~/.claude/skills/
 ```
 
 **Cursor, ChatGPT, Gemini, Copilot, anything else:** see
@@ -74,7 +76,7 @@ git clone https://github.com/sendpulse/sendpulse-email-skill ~/.claude/skills/se
 ## Update
 
 ```bash
-cd <skill folder> && git pull
+cd sendpulse-skills && git pull   # then re-copy the skill folder (or symlink once)
 ```
 
 The skill also self-checks: with web access it compares the local `VERSION` against

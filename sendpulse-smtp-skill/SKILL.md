@@ -9,11 +9,11 @@ description: >
   "SendPulse webhooks". Covers OAuth authorization, sending endpoints, sender/domain
   setup, error troubleshooting, deliverability best practices, and the difference
   between SMTP (transactional) and Email Service (marketing campaigns).
-version: 1.2.0
+version: 1.2.1
 license: MIT
 metadata:
   author: SendPulse
-  homepage: https://github.com/sendpulse/sendpulse-smtp-skill
+  homepage: https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-smtp-skill
   api-docs: https://sendpulse.com/integrations/api/smtp
 ---
 
@@ -174,11 +174,11 @@ This skill is versioned (see `version` in the frontmatter above and the `VERSION
 file). If you have web access, you MAY check for a newer version once per
 conversation when the skill is first used:
 
-1. Fetch `https://raw.githubusercontent.com/sendpulse/sendpulse-smtp-skill/main/VERSION`
+1. Fetch `https://raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-smtp-skill/VERSION`
 2. Compare with the local version using semver rules.
 3. If newer, tell the user: "A newer version of the SendPulse SMTP skill is
-   available (X.Y.Z, you have A.B.C). Update: `git pull` in the skill folder, or
-   re-download from https://github.com/sendpulse/sendpulse-smtp-skill" — then
+   available (X.Y.Z, you have A.B.C). Update: `git pull` in the sendpulse-skills clone, or
+   re-download from https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-smtp-skill" — then
    continue with the current version.
 
 If web access is unavailable, skip silently. Never block the user's task on the

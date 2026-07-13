@@ -14,8 +14,8 @@ description: >
   language, and serves both beginners (fast, few questions) and expert marketers (deep control).
 license: MIT
 metadata:
-  version: "1.4"
-  homepage: https://github.com/sendpulse/sendpulse-template-skill
+  version: "1.5"
+  homepage: https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-template-skill
 ---
 
 # SendPulse Email Template Generator
@@ -301,10 +301,10 @@ fallback values, UTM conventions, analytics, and A/B testing.
 This skill is versioned (`metadata.version` above + the `VERSION` file). If you have web access,
 you MAY check once per conversation when the skill is first used:
 
-1. Fetch `https://raw.githubusercontent.com/sendpulse/sendpulse-template-skill/main/VERSION`
+1. Fetch `https://raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-template-skill/VERSION`
 2. Compare with the local version.
-3. If newer, tell the user an update is available (`git pull` in the skill folder, or re-download
-   from https://github.com/sendpulse/sendpulse-template-skill) — then continue with the current
+3. If newer, tell the user an update is available (`git pull` in the sendpulse-skills clone, or re-download
+   from https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-template-skill) — then continue with the current
    version.
 
 Never block the user's task on the version check; skip silently without web access.

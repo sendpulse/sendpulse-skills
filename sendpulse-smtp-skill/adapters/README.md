@@ -5,16 +5,21 @@ any LLM-based tool can use it. Pick your platform:
 
 ## Claude Code / Claude Desktop (native)
 
-```bash
-# Project-level (shared with the team via git):
-git clone https://github.com/sendpulse/sendpulse-smtp-skill .claude/skills/sendpulse-smtp-skill
+The skill lives in the `sendpulse-skills` monorepo. Clone it once, then copy (or
+symlink) this skill's folder into your skills directory:
 
-# Or user-level (all your projects):
-git clone https://github.com/sendpulse/sendpulse-smtp-skill ~/.claude/skills/sendpulse-smtp-skill
+```bash
+git clone https://github.com/sendpulse/sendpulse-skills
+
+# User-level (all your projects):
+cp -r sendpulse-skills/sendpulse-smtp-skill ~/.claude/skills/
+# Or project-level (shared with the team via git):
+cp -r sendpulse-skills/sendpulse-smtp-skill .claude/skills/
 ```
 
-Claude discovers `SKILL.md` automatically and activates it when the conversation
-matches its description. Update with `git pull` in the skill folder.
+(On macOS/Linux a symlink instead of `cp -r` means a plain `git pull` in the clone
+updates the skill in place.) Claude discovers `SKILL.md` automatically and
+activates it when the conversation matches its description.
 
 ## Cursor
 
@@ -51,11 +56,12 @@ Two universal options:
 1. **Paste**: `SKILL.md` alone is self-sufficient for the common cases — paste it
    into the system prompt / custom instructions. Add reference files as needed.
 2. **Link**: if the tool can browse, give it
-   `https://raw.githubusercontent.com/sendpulse/sendpulse-smtp-skill/main/SKILL.md`
+   `https://raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-smtp-skill/SKILL.md`
    and let it follow the relative links to `references/`.
 
 ## Updating
 
-Every copy is a snapshot. To update: `git pull` (cloned installs) or re-download
-and re-upload (ChatGPT/gems). The skill itself checks the published `VERSION`
-file when it has web access and will remind the user when a newer release exists.
+Every copy is a snapshot. To update: `git pull` in the monorepo clone and re-copy
+the skill folder (not needed for symlinked installs), or re-download and re-upload
+(ChatGPT/gems). The skill itself checks the published `VERSION` file when it has
+web access and will remind the user when a newer release exists.

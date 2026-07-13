@@ -3,6 +3,12 @@
 Versioning: `vMAJOR.MINOR`. MAJOR = breaking changes to rules/structure; MINOR = additive rules,
 references, examples, or fixes.
 
+## v1.5 — 2026-07-13
+- **Published to GitHub.** Placeholder repository URLs replaced with the real monorepo paths
+  (`github.com/sendpulse/sendpulse-skills`, folder `sendpulse-template-skill/`); the version
+  self-check added in v1.4 now points at the live
+  `raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-template-skill/VERSION`.
+
 ## v1.4 — 2026-07-06
 - **Self-update check.** Added a `VERSION` file and a "Keeping this skill up to date" section in
   SKILL.md: with web access, the assistant may compare the local version against the published

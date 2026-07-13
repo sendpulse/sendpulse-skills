@@ -11,11 +11,11 @@ description: >
   SendPulse API (https://sendpulse.com/integrations/api/bulk-email). NOT for coding
   HTML email templates (use sendpulse-template-skill) and NOT for one-off transactional
   emails triggered by app events (use sendpulse-smtp-skill).
-version: 1.1.0
+version: 1.1.1
 license: MIT
 metadata:
   author: SendPulse
-  homepage: https://github.com/sendpulse/sendpulse-email-skill
+  homepage: https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-email-skill
   api-docs: https://sendpulse.com/integrations/api/bulk-email
 ---
 
@@ -167,10 +167,10 @@ matches: [PHP](https://github.com/sendpulse/sendpulse-rest-api-php),
 This skill is versioned (frontmatter above + the `VERSION` file). If you have web
 access, you MAY check once per conversation when the skill is first used:
 
-1. Fetch `https://raw.githubusercontent.com/sendpulse/sendpulse-email-skill/main/VERSION`
+1. Fetch `https://raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-email-skill/VERSION`
 2. Compare with the local version (semver).
-3. If newer, tell the user an update is available (`git pull` in the skill folder or
-   re-download from https://github.com/sendpulse/sendpulse-email-skill) — then
+3. If newer, tell the user an update is available (`git pull` in the sendpulse-skills clone or
+   re-download from https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-email-skill) — then
    continue with the current version.
 
 Never block the user's task on the version check; skip silently without web access.

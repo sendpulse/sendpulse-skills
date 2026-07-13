@@ -4,6 +4,17 @@ All notable changes to the SendPulse SMTP Skill. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning follows
 [SemVer](https://semver.org/).
 
+## [1.2.1] — 2026-07-13
+
+### Changed
+
+- Published to GitHub: all placeholder repository URLs replaced with the real
+  monorepo paths (`github.com/sendpulse/sendpulse-skills`, skill folder
+  `sendpulse-smtp-skill/`). The version self-check now points at
+  `raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-smtp-skill/VERSION`
+  and is live. Install/update instructions rewritten for the monorepo layout
+  (clone once → copy or symlink the skill folder).
+
 ## [1.2.0] — 2026-07-08
 
 ### Added

@@ -42,10 +42,12 @@ VERSION · CHANGELOG.md
 
 ## Install
 
-**Claude Code / Claude Desktop:**
+**Claude Code / Claude Desktop** (the skill lives in the `sendpulse-skills`
+monorepo — clone once, copy or symlink the skill folder):
 
 ```bash
-git clone https://github.com/sendpulse/sendpulse-smtp-skill ~/.claude/skills/sendpulse-smtp-skill
+git clone https://github.com/sendpulse/sendpulse-skills
+cp -r sendpulse-skills/sendpulse-smtp-skill ~/.claude/skills/
 ```
 
 **Cursor, ChatGPT, Gemini, Copilot, anything else:** see
@@ -54,7 +56,7 @@ git clone https://github.com/sendpulse/sendpulse-smtp-skill ~/.claude/skills/sen
 ## Update
 
 ```bash
-cd <skill folder> && git pull
+cd sendpulse-skills && git pull   # then re-copy the skill folder (or symlink once)
 ```
 
 The skill also self-checks: when the assistant has web access it compares the
