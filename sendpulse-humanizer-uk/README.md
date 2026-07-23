@@ -122,6 +122,13 @@ The skill is versioned (`VERSION` file + `version` in `SKILL.md` frontmatter). W
 assistant may check the published `VERSION` on GitHub once per conversation and tell you if a newer
 version exists — it never blocks your task. See `CHANGELOG.md` for version history.
 
-## License
+## License & attribution
 
-MIT — use freely, fork, improve. See `LICENSE`.
+The skill itself is **MIT** — use freely, fork, improve. See `LICENSE`.
+
+Part of the russianism/calque data in `references/russianisms.md` is adapted (re-expressed into a
+dictionary format and extended) from [grayodesa/LT-Ukranian-calques](https://github.com/grayodesa/LT-Ukranian-calques)
+(© 2026 Sergiy Petrenko), whose relevant rule files are **CC-BY-4.0** and derive from the
+[UA-GEC](https://github.com/grammarly/ua-gec) corpus (Grammarly, CC-BY-4.0). Full attribution and
+license texts are in [`NOTICE`](NOTICE). No ShareAlike applies, so the skill stays MIT; the LGPL-2.1
+parts of the source repo are not used.

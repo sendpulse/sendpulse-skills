@@ -4,6 +4,36 @@ All notable changes to the SendPulse Ukrainian Humanizer skill. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning follows `vMAJOR.MINOR`
 (MAJOR = breaking changes to rules/structure; MINOR = additive rules, references, or fixes).
 
+## [1.1] — 2026-07-23
+
+### Added
+
+- **~50 new calque/russianism pairs** in `references/russianisms.md`, adapted from
+  [grayodesa/LT-Ukranian-calques](https://github.com/grayodesa/LT-Ukranian-calques) (CC-BY-4.0),
+  itself derived from the [UA-GEC](https://github.com/grammarly/ua-gec) corpus (Grammarly, CC-BY-4.0):
+  - a dedicated **«по + давальний» temporal-calque** block (по закінченню → після закінчення / по
+    закінченні, and 11 more);
+  - 7 more «по»-government pairs (по плану → за планом, по можливості → за можливості, по аналогії з
+    → за аналогією з, під авторством → за авторством, …);
+  - ~20 lexical/phrasal calques (в першу чергу → передусім, на фоні → на тлі, як тільки → щойно,
+    з одного боку, таким чином → отже, скоріше за все → найімовірніше, прийняти міри → вжити заходів,
+    приходити до висновку → доходити висновку, приводити до → призводити до, мається на увазі →
+    йдеться про, …);
+  - lexical russianisms (доктор → лікар, сотовий → мобільний, дійсний → справжній, пару → кілька,
+    прийшлось → довелося, робити вигляд → удавати, …);
+  - active participle `включаючи` → включно з / зокрема.
+- **Punctuation coverage** in pattern 22 (`SKILL.md`): parenthetical words (вставні слова) take
+  commas on both sides; strip stray spaces before punctuation. Reflected in the checklist and the
+  «по»-scanner (temporal forms).
+- **`NOTICE`** file with full attribution and license texts (CC-BY-4.0 for the incorporated data;
+  MIT for the skill). A «Джерела» section added to `references/russianisms.md`.
+
+### Attribution / licensing
+
+- Incorporated data is **CC-BY-4.0** (grayodesa/LT-Ukranian-calques → UA-GEC/Grammarly); credited in
+  `NOTICE` and `russianisms.md`. No ShareAlike — the skill stays MIT. LGPL-2.1 material from the
+  source repo (`reference/official-lt/`) is **not** used or redistributed.
+
 ## [1.0] — 2026-07-22
 
 Initial public release.

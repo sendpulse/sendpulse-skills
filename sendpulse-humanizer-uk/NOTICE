@@ -1,0 +1,57 @@
+sendpulse-humanizer-uk
+Copyright (c) 2026 SendPulse
+Licensed under the MIT License (see LICENSE).
+
+================================================================================
+THIRD-PARTY MATERIAL AND ATTRIBUTION
+================================================================================
+
+This skill incorporates linguistic data (Russian→Ukrainian calque and
+prepositional-government correction pairs) adapted from the project below.
+The pairs were re-expressed into this skill's dictionary format and extended;
+the original XML rule files are NOT redistributed here.
+
+--------------------------------------------------------------------------------
+1. grayodesa/LT-Ukranian-calques
+--------------------------------------------------------------------------------
+Source:    https://github.com/grayodesa/LT-Ukranian-calques
+Author:    Sergiy Petrenko (Copyright (c) 2026)
+Files used: rules/grammar-government-ua.xml, rules/grammar-fluency-ua.xml,
+            rules/grammar-punctuation-ua.xml
+License:   Creative Commons Attribution 4.0 International (CC-BY-4.0)
+           https://creativecommons.org/licenses/by/4.0/
+
+Note: although the repository's top-level LICENSE is MIT, the individual rule
+files listed above carry an in-file CC-BY-4.0 header, which governs them. This
+skill treats that material as CC-BY-4.0.
+
+Changes made: the calque→correction pairs were extracted, translated into a
+human-readable dictionary format (references/russianisms.md), regrouped, and
+supplemented with additional entries. No warranty; no endorsement implied.
+
+--------------------------------------------------------------------------------
+2. UA-GEC corpus (upstream of the above)
+--------------------------------------------------------------------------------
+Source:    https://github.com/grammarly/ua-gec
+Author:    Grammarly
+License:   Creative Commons Attribution 4.0 International (CC-BY-4.0)
+           https://creativecommons.org/licenses/by/4.0/
+
+The LT-Ukranian-calques fluency and government rules are auto-generated from,
+or based on, the UA-GEC corpus. Attribution is passed through accordingly.
+
+--------------------------------------------------------------------------------
+Not included
+--------------------------------------------------------------------------------
+The LGPL-2.1 material in grayodesa/LT-Ukranian-calques
+(reference/official-lt/, and the LanguageTool engine itself) is NOT used and
+NOT redistributed by this skill.
+
+================================================================================
+CC-BY-4.0 SUMMARY (informational — full text at the link above)
+================================================================================
+You are free to share and adapt the material for any purpose, even
+commercially, provided you give appropriate credit, provide a link to the
+license, and indicate if changes were made. There is no ShareAlike obligation;
+this skill therefore remains under the MIT License, while the incorporated
+material retains CC-BY-4.0 attribution as recorded above.
