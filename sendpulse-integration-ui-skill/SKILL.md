@@ -1,11 +1,12 @@
 ---
 name: sendpulse-integration-ui-skill
 description: >
-  The SendPulse marketplace CSS design system (`sp-marketplace-app-ui.min.css`, linked from the
-  CDN) — its class vocabulary, `sp_icons`, colour tokens, layout utilities and light/dark builds.
-  Use for UI in any SendPulse integration — marketplace app, embedded widget or standalone page —
-  in any framework or none: panels, forms, buttons, modals, tables, dropdowns, badges, icons,
-  dark theme. Build every element from the library, never hand-rolled.
+  UI work in a SendPulse marketplace integration that links the prebuilt
+  `sp-marketplace-app-ui.min.css` from the CDN — app, embedded widget or standalone page, any
+  framework or none. Building a settings or connection screen, fixing dark theme, or panels
+  rendering transparent with focus rings missing. Forms, buttons, modals, tables, dropdowns, badges,
+  `sp_icons`, colour tokens, layout utilities, `?theme=dark` / `ma-dark` light and dark builds,
+  layout inside the host iframe.
 version: 1.0.0
 license: MIT
 metadata:
@@ -80,8 +81,9 @@ difference between "uses SendPulse classes" and "looks like SendPulse":
 | `references/tokens.css` | the 28 custom properties the bundle reads and never defines, light + dark, plus `color-scheme` | always — link after the bundle |
 | `references/bundle-fixes.css` | the structural gaps of Step 6 as copy-paste CSS: the `.nav` foundation, status-dot specificity, the `.input-group` flex row, `.badge-paid` and `.avatar` alignment | always — take the whole file |
 | `references/kitchen-sink.html` | every load-bearing component rendered correctly in one page, both themes | copy markup from here instead of retyping it from prose |
+| `references/check-build.sh` | the wiring checker: the CDN link, `tokens.css` and `bundle-fixes.css`, load order, the theme pair, `var()` names — no Node, no browser | any repo, pre-commit |
 | `references/check-classes.sh` | greps your templates for classes the bundle doesn't define — no Node, no browser | any repo, any framework, pre-commit |
-| `references/verify.mjs` | the same lookup against the rendered DOM, plus 14 more checks, in Playwright | before you call any screen done |
+| `references/verify.mjs` | the same lookup against the rendered DOM, plus 19 more checks, in Playwright | before you call any screen done |
 | `references/refresh.sh` | re-derives `classes.txt`, `icons.txt` and the token list from the live CDN and diffs them | when this skill feels stale, or a class you expect is missing |
 
 Two more files, `references/classes.txt` and `references/icons.txt`, are lookup rather than
@@ -381,11 +383,22 @@ and `references/gaps.md` is where they are argued out.
 
 ## Step 7 — Check the result mechanically
 
-The mistake that most reliably stops a screen looking like SendPulse is a class the bundle never
-defined — a typo, a half-remembered name, an invented one. Both scripts here catch it; take
-whichever your repo can run.
+Three checkers ship in `references/`. They answer different questions, and none of them replaces
+looking at the screen in both themes.
 
-**No toolchain — grep only.** Works in any repo, any framework, and in a pre-commit hook:
+**The wiring, before anything else.** `check-build.sh` reads the repo — no Node, no browser — and
+catches what fails silently here: a self-hosted bundle (every glyph breaks, since `url(/img/…)`
+resolves against the stylesheet's origin), a missing or misordered `tokens.css` / `bundle-fixes.css`,
+app CSS ahead of the fixes, both builds live at once, `ma-dark` off the root, a `var()` name no
+stylesheet defines, `prefers-color-scheme` in app CSS. FAIL means broken; WARN means look.
+
+```bash
+references/check-build.sh path/to/integration     # or no argument, for the current repo
+```
+
+**The class names.** The mistake that most reliably stops a screen looking like SendPulse is a class
+the bundle never defined — a typo, a half-remembered name, an invented one. Two scripts catch it;
+take whichever your repo can run. Grep only, works anywhere:
 
 **Copy `references/` into the repo** (`tools/sp-ui/`, say) and run it from there, or call it by its
 full path in this skill — either way the scripts find `classes.txt` beside themselves:
@@ -408,7 +421,12 @@ node tools/sp-ui/verify.mjs http://localhost:5173 --app-prefix app-
 ```
 
 Its first check is the same lookup, but against the **live DOM**, so runtime-composed names are
-covered too. `--app-prefix` declares your own classes (`app-`, whatever the repo uses); the classes
+covered too. The other nineteen turn this skill's own rules into assertions: the undefined custom
+properties, `color-scheme`, the body the dark reset leaves white, a `glyphicon-*`, a non-Onest font,
+the frame rules, icon a11y, a theme switcher — and every Step 6 gap a rendered page can be measured
+for (the stacked `.input-group`, unfloated `.nav-tabs`, a status dot grey inside a
+`.list-group-item`, the `.avatar` off its baseline, a `.modal` with no backdrop, the toggle knob over
+its label, and the four styled-but-inert classes). `--app-prefix` declares your own classes (`app-`, whatever the repo uses); the classes
 `bundle-fixes.css` introduces are read out of that file, so the two never drift. Both scripts work
 off the shipped list rather than asking the bundle, and have to: the CDN sends
 `access-control-allow-origin: https://login.sendpulse.com`, so neither a shell nor a local page can
@@ -450,11 +468,14 @@ looks right — spacing, hierarchy and restraint still need your eyes on it in b
 
 ## Checklist before delivering
 
-`references/check-classes.sh` and `references/verify.mjs` assert most of this skill mechanically —
-run them first (Step 7), then check by eye only what a script cannot see:
+`references/check-build.sh`, `references/check-classes.sh` and `references/verify.mjs` assert most of
+this skill mechanically — run them first (Step 7), then check by eye only what a script cannot see:
 
-- [ ] **Run the checkers.** `check-classes.sh` clean over the templates and, where Node is
-      available, `verify.mjs` clean in **both** themes. Everything they cover is off this list.
+- [ ] **Run the checkers.** `check-build.sh` clean on the repo, `check-classes.sh` clean over the
+      templates and, where Node is available, `verify.mjs` clean in **both** themes. Between them
+      they cover the CDN link, both required files and their load order, the theme pair and
+      `ma-dark`, `var()` names, invented classes in the source *and* the DOM, and the Step 6 gaps.
+      Everything they cover is off this list.
 - [ ] **App CSS is short**, and every rule in it names the bundle gap or design measurement it
       exists for — no colours, no re-styled components. A growing stylesheet means a class was missed.
 - [ ] **Nothing the bundle already styles was re-implemented**, and no hardcoded colour stands where

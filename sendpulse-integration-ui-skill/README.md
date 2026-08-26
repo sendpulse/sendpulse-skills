@@ -27,7 +27,8 @@ It's a plain folder — `SKILL.md` (instructions), `examples/` (whole screens) a
 - **Theming discipline** — `?theme=dark` from the host, `ma-dark`, and app CSS that survives both.
 - **Grep-able truth** — 1411 classes and 536 icon names as flat lists, so a name gets checked
   instead of guessed.
-- **Checkers** — templates against the class list, and the rendered DOM against 15 rules.
+- **Checkers** — the repo's wiring, templates against the class list, and the rendered DOM against
+  20 rules.
 
 ## Structure
 
@@ -45,8 +46,9 @@ references/
   bundle-fixes.css              # the structural gaps the bundle leaves, as copy-paste CSS
   kitchen-sink.html             # every load-bearing component rendered correctly
   classes.txt · icons.txt       # 1411 classes, 536 sp_icons names — grep-able lookup
+  check-build.sh                # wiring: the CDN link, tokens.css, bundle-fixes.css, load order
   check-classes.sh              # greps templates for classes the bundle doesn't define. No Node
-  verify.mjs                    # the same check against the rendered DOM, +14 more, in Playwright
+  verify.mjs                    # the same check against the rendered DOM, +19 more, in Playwright
   refresh.sh                    # re-derives both lists from the live CDN and prints what drifted
 VERSION · CHANGELOG.md · LICENSE
 ```

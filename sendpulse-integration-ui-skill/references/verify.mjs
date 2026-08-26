@@ -210,7 +210,87 @@ const audit = ({ known: knownList, icons: iconList, tokens, prefixes, theme }) =
         }
   }
 
-  // 15. the theme belongs to the host, so the app must not offer a control for it.
+  // 15. the status dot that `.list-group-item .badge` out-specifies (gaps.md). Test the colour the
+  //      modifier is supposed to produce, not the muted grey it loses to: the grey differs between
+  //      the two builds, the four dot colours do not.
+  const DOT = {
+    "badge-status-success": "rgb(0, 177, 117)",
+    "badge-status-primary": "rgb(66, 139, 202)",
+    "badge-status-warning": "rgb(255, 155, 70)",
+    "badge-status-danger": "rgb(248, 104, 80)",
+  };
+  for (const el of sel(".list-group-item [class*='badge-status-']")) {
+    const mod = [...el.classList].find((c) => DOT[c]);
+    if (!mod) continue;
+    const got = getComputedStyle(el).backgroundColor;
+    if (got !== DOT[mod])
+      add(
+        "status dot is the wrong colour inside a .list-group-item",
+        `${label(el)} — ${got}, expected ${DOT[mod]}; .list-group-item .badge out-specifies the modifier, so copy bundle-fixes.css`,
+      );
+  }
+
+  // 16. .avatar is inline-block with no vertical-align, so beside a label it sits below the baseline.
+  for (const el of sel(".dropdown-toggle > .avatar, .dropdown-menu .avatar")) {
+    if (getComputedStyle(el).verticalAlign === "baseline")
+      add(
+        ".avatar hangs below the baseline",
+        `${label(el)} — needs vertical-align:middle; copy bundle-fixes.css`,
+      );
+  }
+
+  // 17. the bundle ships no modal JS and no backdrop element, so a shown .modal is the app's job:
+  //     display + .in on the dialog, its own .modal-backdrop, and modal-open on <body>.
+  for (const el of sel(".modal")) {
+    if (getComputedStyle(el).display === "none") continue;
+    // Same escape hatch as check 20: a reference page pins a dialog open to show it.
+    if (el.closest("[data-sp-audit-ignore]")) continue;
+    if (!document.querySelector(".modal-backdrop"))
+      add("modal shown with no backdrop", `${label(el)} — render your own .modal-backdrop.fade.in`);
+    if (!document.body.classList.contains("modal-open"))
+      add("modal shown without modal-open on body", `${label(el)} — the page scrolls behind it`);
+    if (!el.classList.contains("in"))
+      add("modal shown without .in", `${label(el)} — only .in animates the dialog into place`);
+  }
+
+  // 18. Classes the bundle defines and does not implement (gaps.md). They pass the vocabulary
+  //     check above and still do nothing, so they are worth naming — but the fix is your own CSS
+  //     or different markup, not a different class name, which is why this is one grouped note.
+  const INERT = {
+    accordion: "only sets width — build it from .panel-group + .collapse/.in",
+    "tab-content": "there is no generic .tab-content rule — style the panel yourself",
+    "bootstrap-select": "the plugin's own CSS is a vendor file the bundle does not carry",
+    "settings-toggle-btn-sm": "internally inconsistent in the bundle — use the default size",
+  };
+  const inert = Object.keys(INERT).filter((c) => document.querySelector("." + c));
+  if (inert.length)
+    add(
+      "styled but inert",
+      inert.map((c) => `.${c} (${INERT[c]})`).join("; ") + " — see gaps.md",
+    );
+
+  // 19. .settings-toggle-radius is positioned only by descendant selectors, so as a sibling of the
+  //     label it lands on top of the text instead of beside it. Measured, not inferred.
+  for (const el of sel(".settings-toggle-radius")) {
+    const knob = el.getBoundingClientRect();
+    if (!knob.width) continue;
+    for (const sib of el.parentElement?.children ?? []) {
+      if (sib === el || !sib.textContent.trim()) continue;
+      const text = sib.getBoundingClientRect();
+      const overlaps =
+        knob.left < text.right - 2 && knob.right > text.left + 2 &&
+        knob.top < text.bottom - 2 && knob.bottom > text.top + 2;
+      if (overlaps) {
+        add(
+          ".settings-toggle-radius sits over its label",
+          `${label(el)} — nest the knob inside the label span, not beside it`,
+        );
+        break;
+      }
+    }
+  }
+
+  // 20. the theme belongs to the host, so the app must not offer a control for it.
   //     data-sp-audit-ignore exists for reference pages like kitchen-sink.html, which are browsed
   //     rather than embedded; an integration has no legitimate use for it.
   const THEME_CONTROL = /(dark|light)\s*(theme|mode)|theme\s*(switch|toggle|selector)|(switch|toggle)\s*(the\s*)?theme/i;

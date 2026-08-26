@@ -48,9 +48,18 @@ guidance or reference files, PATCH for corrections to existing facts.
   connected marketplaces: the `paid` family with the badge inset, separated `.list-group` cards
   with the connected state on the left border, a row kebab with the eight lines of JS the
   CSS-only bundle leaves to you, and a text-first empty state.
-- Checkers: `check-classes.sh` (no toolchain, greps templates for classes the bundle does not
-  define), `verify.mjs` (the same check against the rendered DOM plus 14 more, in Playwright),
-  `refresh.sh` (re-derives both lists from the live CDN and prints what drifted).
+- Checkers: `check-build.sh` (the wiring: the bundle linked from the CDN rather than self-hosted,
+  `tokens.css` and `bundle-fixes.css` present and linked in order, app CSS last, one theme build
+  live at a time, `ma-dark` on the root, and every `var()` name checked against the 28 that exist),
+  `check-classes.sh` (no toolchain, greps templates for classes the bundle does not define),
+  `verify.mjs` (the same check against the rendered DOM plus 19 more, in Playwright), `refresh.sh`
+  (re-derives both lists from the live CDN and prints what drifted).
+- Runtime assertions for the Step 6 gaps a rendered page can be measured for: a status dot that comes
+  out grey inside a `.list-group-item`, an `.avatar` off its baseline in a dropdown, a `.modal` shown
+  with no backdrop / `modal-open` / `.in`, a `.settings-toggle-radius` overlapping its own label, and
+  the four classes that are styled but inert (`.accordion`, `.tab-content`, `.bootstrap-select`,
+  `.settings-toggle-btn-sm`). Each was verified firing against a purpose-built broken page and silent
+  on `kitchen-sink.html`.
 - A scope note at the top of `SKILL.md`: the wiring steps cover the CDN stylesheet, and an app that
   already receives the design system through its own build pipeline is left alone. The skill is
   self-contained — it names no other skill as a prerequisite.
