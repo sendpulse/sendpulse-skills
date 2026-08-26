@@ -1,4 +1,4 @@
-# SendPulse Marketplace UI kit — `sendpulse-integration-ui-skill`
+# SendPulse Marketplace UI kit — `sendpulse-marketplace-ui-cdn`
 
 An AI skill that teaches an assistant (Claude Code/Desktop, Cursor, ChatGPT, …) to build SendPulse
 integration UI out of the shared design system as served from the CDN —
@@ -67,20 +67,20 @@ then copy or symlink the skill folder):
 git clone https://github.com/sendpulse/sendpulse-skills
 
 # User-level (all your projects):
-cp -R sendpulse-skills/sendpulse-integration-ui-skill ~/.claude/skills/
+cp -R sendpulse-skills/sendpulse-marketplace-ui-cdn ~/.claude/skills/
 # Or project-level (committed, shared with everyone who clones the repo):
-cp -R sendpulse-skills/sendpulse-integration-ui-skill .claude/skills/
+cp -R sendpulse-skills/sendpulse-marketplace-ui-cdn .claude/skills/
 ```
 
 A symlink instead of `cp -R` means a plain `git pull` updates the skill in place. The folder name
-must stay `sendpulse-integration-ui-skill`. It loads automatically — just ask for a screen ("build
+must stay `sendpulse-marketplace-ui-cdn`. It loads automatically — just ask for a screen ("build
 the settings screen for this integration") and the skill triggers on its description.
 
 **Claude.ai / Claude Desktop upload:** zip the folder, then *Settings → Capabilities → Skills →
 Upload skill*.
 
 **Cursor / ChatGPT / other LLMs:** keep the folder in the project and point a rule at
-`sendpulse-integration-ui-skill/SKILL.md`, or upload `SKILL.md` plus `references/components.md` as knowledge.
+`sendpulse-marketplace-ui-cdn/SKILL.md`, or upload `SKILL.md` plus `references/components.md` as knowledge.
 The scripts only work where the assistant can run commands.
 
 ## Using the checkers in your app repo
@@ -90,7 +90,7 @@ resolves `playwright` from the **working directory** — run it from the repo th
 playwright. Easiest is to copy the folder in:
 
 ```bash
-cp -R sendpulse-integration-ui-skill/references tools/sp-ui
+cp -R sendpulse-marketplace-ui-cdn/references tools/sp-ui
 
 # no toolchain needed
 tools/sp-ui/check-classes.sh --app-prefix app- $(find src -name '*.html')

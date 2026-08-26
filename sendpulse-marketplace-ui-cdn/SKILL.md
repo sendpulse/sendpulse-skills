@@ -1,5 +1,5 @@
 ---
-name: sendpulse-integration-ui-skill
+name: sendpulse-marketplace-ui-cdn
 description: >
   UI work in a SendPulse marketplace integration that links the prebuilt
   `sp-marketplace-app-ui.min.css` from the CDN — app, embedded widget or standalone page, any
@@ -11,10 +11,10 @@ version: 1.0.0
 license: MIT
 metadata:
   author: SendPulse
-  homepage: https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-integration-ui-skill
+  homepage: https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-marketplace-ui-cdn
 ---
 
-# SendPulse UI library — visual vocabulary
+# SendPulse Marketplace UI kit — the CDN bundle
 
 **Be simple.** Before anything else: SendPulse screens are deliberately plain, and the shortest
 correct markup is the house style rather than a shortcut. Every rule below is in service of that —
@@ -515,7 +515,7 @@ what `--write` rewrites, what it only reports, and what to do with a drift line.
 ## Version and updates
 
 With web access you MAY, once per conversation, compare the `version` above against
-`https://raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-integration-ui-skill/VERSION`
+`https://raw.githubusercontent.com/sendpulse/sendpulse-skills/main/sendpulse-marketplace-ui-cdn/VERSION`
 and mention a newer one — then carry on with this version regardless. Never block on the check.
 
 The design system moves independently of this skill, so **when the live bundle and this file

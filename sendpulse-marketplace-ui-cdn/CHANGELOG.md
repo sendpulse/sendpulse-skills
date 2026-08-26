@@ -1,4 +1,4 @@
-# Changelog — sendpulse-integration-ui-skill
+# Changelog — sendpulse-marketplace-ui-cdn
 
 All notable changes to the SendPulse Marketplace UI kit (CDN route). Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning follows
@@ -9,7 +9,10 @@ guidance or reference files, PATCH for corrections to existing facts.
 
 ### Added
 
-- Initial release.
+- Initial release. Named `sendpulse-marketplace-ui-cdn` after its delivery route: this skill covers
+  the prebuilt bundle linked from the CDN, and an app that instead receives the design system
+  through its own LESS build is a different route with a different class list, covered by a
+  separate skill. The route is in the name so there is no unmarked one that reads as the default.
 - `SKILL.md`: the class vocabulary of `sp-marketplace-app-ui.min.css` — wiring the CDN stylesheet,
   the custom properties the bundle reads but never defines, layout and spacing inside the host
   iframe, light/dark theming (`?theme=dark`, `ma-dark`), the structural gaps the bundle leaves, and
