@@ -5,6 +5,47 @@ All notable changes to the SendPulse Marketplace UI kit (CDN route). Format foll
 [SemVer](https://semver.org/) — MAJOR for a rewrite of the rules or structure, MINOR for new
 guidance or reference files, PATCH for corrections to existing facts.
 
+## [1.1.0] — 2026-08-27
+
+### Added
+
+- `adapters/` — installing this skill in tools that are not Claude Code, mirroring the layout the
+  other SendPulse skills use. `adapters/README.md` states plainly what survives on each platform:
+  everything, where the assistant has a shell; Steps 0–5 plus a manual checklist, in a chat window.
+- `adapters/chatgpt/instructions.md` — the condensed, self-contained form of the skill for a Custom
+  GPT, a ChatGPT Project or a Gemini gem. It names no file paths in its own flow and is 7.9k
+  characters, inside the *Instructions* field's 8000-character limit with little headroom.
+- `adapters/chatgpt/pocket-guide.md` — the second tier for those tools: the icon rules, the palette,
+  the sixteen gaps as a symptom table, and the pre-delivery checklist, which is the manual form of
+  the three checkers. Step 7 and the delivery checklist in `SKILL.md` now point at it for anyone
+  working without a shell.
+- `adapters/gemini/GEMINI.md` and `adapters/cursor/sendpulse-marketplace-ui.mdc` — repo-level rule
+  files for gemini-cli and Cursor, both of which keep the full reference folder and its checkers.
+
+### Changed
+
+- *Scope* now says what degrades without a filesystem or a shell, instead of leaving a chat-window
+  reader to infer it.
+- Step 1 and Step 4 lead with the rule and follow with the argument, rather than the reverse. The
+  intro, the 28-custom-properties paragraph and the `var()`-naming paragraph now do the same: the
+  instruction is the bold lead-in, the reasoning follows it.
+- No rule in `SKILL.md` is left as a pointer alone. The intro states the two rules it used to
+  delegate to Step 2 and Step 4, and Step 4's width-cap bullet names the wrapper and the 364px value
+  instead of deferring to *Controls do not stretch*. Step numbers remain, as locators for the detail.
+- The Step 0 file table carries a `Use` column — COPY, READ, LOOKUP or SHELL per file — so how a
+  file is meant to be used is a keyword rather than something to infer from the *When* column.
+- Step 1 and Step 6 now state the no-filesystem path, as Step 7 and the delivery checklist already
+  did: `tokens.css` is reproducible from `adapters/chatgpt/instructions.md`, and the sixteen-gap
+  index from `adapters/chatgpt/pocket-guide.md`.
+
+### Fixed
+
+- Step 7 listed the `verify.mjs` checks twice, the second time as "the other fourteen" where the
+  paragraph above it and the Step 0 table both say nineteen. The stale duplicate is removed.
+
+Nothing in the Claude Code path changed: no reference file moved or changed content, and the
+`adapters/` files are never loaded on it.
+
 ## [1.0.0] — 2026-08-25
 
 ### Added

@@ -37,6 +37,11 @@ SKILL.md                        # core playbook (entry point for the AI)
 examples/
   settings-screen.html          # a whole form-shaped screen, composed — start here
   amazon-connections-*.html     # the other shape: plan-gated list, cards, row kebab + its JS
+adapters/                       # installing this skill outside Claude Code
+  README.md                     # what survives on each platform, and how to install it there
+  chatgpt/instructions.md       # the condensed, self-contained skill — fits the 8000-char field
+  chatgpt/pocket-guide.md       # icons, palette, the gaps, the manual pre-delivery checklist
+  gemini/GEMINI.md · cursor/*.mdc
 references/
   components.md                 # component catalogue: every load-bearing class + its markup
   gaps.md                       # sixteen classes that look like they work and don't — one per class
@@ -79,9 +84,11 @@ the settings screen for this integration") and the skill triggers on its descrip
 **Claude.ai / Claude Desktop upload:** zip the folder, then *Settings → Capabilities → Skills →
 Upload skill*.
 
-**Cursor / ChatGPT / other LLMs:** keep the folder in the project and point a rule at
-`sendpulse-marketplace-ui-cdn/SKILL.md`, or upload `SKILL.md` plus `references/components.md` as knowledge.
-The scripts only work where the assistant can run commands.
+**Cursor / ChatGPT / Gemini / other LLMs:** see [`adapters/README.md`](adapters/README.md) — it
+ships a rule file for Cursor and gemini-cli (both keep the full folder and its checkers), and a
+condensed, self-contained instruction block plus a pocket guide for ChatGPT and Gemini gems, where
+there is no filesystem. The scripts only work where the assistant can run commands; in a chat
+window the pocket guide's checklist stands in for them.
 
 ## Using the checkers in your app repo
 

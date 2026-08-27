@@ -7,7 +7,7 @@ description: >
   rendering transparent with focus rings missing. Forms, buttons, modals, tables, dropdowns, badges,
   `sp_icons`, colour tokens, layout utilities, `?theme=dark` / `ma-dark` light and dark builds,
   layout inside the host iframe.
-version: 1.0.0
+version: 1.1.0
 license: MIT
 metadata:
   author: SendPulse
@@ -16,11 +16,11 @@ metadata:
 
 # SendPulse Marketplace UI kit — the CDN bundle
 
-**Be simple.** Before anything else: SendPulse screens are deliberately plain, and the shortest
-correct markup is the house style rather than a shortcut. Every rule below is in service of that —
-when two options both work, ship the one with fewer elements, fewer classes and fewer glyphs.
-At screen level that bias means one `.panel` flush to the frame doing the layout (Step 4) and the
-*Restraint* rules at the end of Step 2 — nothing here needs a second skill to be usable.
+**Be simple.** When two options both work, ship the one with fewer elements, fewer classes and
+fewer glyphs. SendPulse screens are deliberately plain; the shortest correct markup is the house
+style, not a shortcut. Two consequences, each stated in full where it applies: one `.panel` flush to
+the frame does the screen layout (Step 4), and nothing is added that carries no information (Step 2,
+*Restraint*). Nothing here needs a second skill to be usable.
 
 **Scope: the CDN stylesheet.** Everything about wiring here — Step 0's `<link>` and load order,
 the custom properties Step 1 has you ship, the two theme builds of Step 5 — assumes the app gets
@@ -36,6 +36,12 @@ own theming switch, and applying Step 0, Step 1 or Step 5 there will fight what 
 Leave that wiring alone and ask whoever set the repo up. **Steps 2–4 still hold either way** — the
 class vocabulary, the icons, the layout rules and the restraint rules are the design system itself,
 not the delivery method.
+
+**Without a filesystem or a shell** — a chat window rather than an agent — Steps 0–5 still hold in
+full; Step 6 needs `references/gaps.md` pasted in; Step 7 becomes the manual checklist in
+`adapters/chatgpt/pocket-guide.md`. That file and `adapters/chatgpt/instructions.md` are the
+condensed, self-contained form of this skill for tools that cannot open files; `adapters/README.md`
+covers installing it in ChatGPT, Gemini, Cursor and Copilot.
 
 > **Non-negotiables — read before writing markup.** Each is spelled out in the step named.
 >
@@ -70,24 +76,29 @@ independently of this skill, so an old date is the one thing here that cannot be
 **Start from the baseline files in this skill — don't retype them.** Copying them is the
 difference between "uses SendPulse classes" and "looks like SendPulse":
 
-| File | What it is | When |
-|---|---|---|
-| `examples/settings-screen.html` | a whole form-shaped screen, composed: panel-as-layout, capped controls, a switcher row, mapping rows, footer | starting any screen — copy the structure, then swap the content |
-| `examples/amazon-connections-screen.html` | the other shape: a plan-gated list of connected things — the `paid` family, separated `.list-group` cards, a row kebab with its JS, a text-first empty state | a screen that lists connections, or anything a pricing plan gates |
-| `references/components.md` | the component catalogue of Step 2: every load-bearing class with the markup it needs | building any component — read the one section |
-| `references/gaps.md` | the diagnostic catalogue of Step 6: sixteen classes that look like they should work and don't, one section each — symptom → cause → fix | when a class misbehaves — grep it by name, read that section |
-| `references/starter.html` | the correct `<head>`: both theme builds linked, load order, the 20-line theme switch | starting any standalone app |
-| `references/tokens.md` | the light palette as lookup: brand, greys, borders, the four semantic families, the three reds | you need a literal colour and no semantic class covers the case |
-| `references/tokens.css` | the 28 custom properties the bundle reads and never defines, light + dark, plus `color-scheme` | always — link after the bundle |
-| `references/bundle-fixes.css` | the structural gaps of Step 6 as copy-paste CSS: the `.nav` foundation, status-dot specificity, the `.input-group` flex row, `.badge-paid` and `.avatar` alignment | always — take the whole file |
-| `references/kitchen-sink.html` | every load-bearing component rendered correctly in one page, both themes | copy markup from here instead of retyping it from prose |
-| `references/check-build.sh` | the wiring checker: the CDN link, `tokens.css` and `bundle-fixes.css`, load order, the theme pair, `var()` names — no Node, no browser | any repo, pre-commit |
-| `references/check-classes.sh` | greps your templates for classes the bundle doesn't define — no Node, no browser | any repo, any framework, pre-commit |
-| `references/verify.mjs` | the same lookup against the rendered DOM, plus 19 more checks, in Playwright | before you call any screen done |
-| `references/refresh.sh` | re-derives `classes.txt`, `icons.txt` and the token list from the live CDN and diffs them | when this skill feels stale, or a class you expect is missing |
+Each file is used one of four ways, and the label says which: **COPY** it into the app verbatim,
+**READ** the one relevant section, **LOOKUP** a name in it, **SHELL** run it. With no filesystem —
+a chat window rather than an agent — the COPY and LOOKUP files are the ones to paste in as
+attachments; `adapters/README.md` maps that route per tool.
 
-Two more files, `references/classes.txt` and `references/icons.txt`, are lookup rather than
-boilerplate — never copied into an app, just grepped when you need to know whether a name exists.
+| Use | File | What it is | When |
+|---|---|---|---|
+| COPY | `examples/settings-screen.html` | a whole form-shaped screen, composed: panel-as-layout, capped controls, a switcher row, mapping rows, footer | starting any screen — copy the structure, then swap the content |
+| COPY | `examples/amazon-connections-screen.html` | the other shape: a plan-gated list of connected things — the `paid` family, separated `.list-group` cards, a row kebab with its JS, a text-first empty state | a screen that lists connections, or anything a pricing plan gates |
+| READ | `references/components.md` | the component catalogue of Step 2: every load-bearing class with the markup it needs | building any component — read the one section |
+| READ | `references/gaps.md` | the diagnostic catalogue of Step 6: sixteen classes that look like they should work and don't, one section each — symptom → cause → fix | when a class misbehaves — grep it by name, read that section |
+| COPY | `references/starter.html` | the correct `<head>`: both theme builds linked, load order, the 20-line theme switch | starting any standalone app |
+| LOOKUP | `references/tokens.md` | the light palette as lookup: brand, greys, borders, the four semantic families, the three reds | you need a literal colour and no semantic class covers the case |
+| COPY | `references/tokens.css` | the 28 custom properties the bundle reads and never defines, light + dark, plus `color-scheme` | always — link after the bundle |
+| COPY | `references/bundle-fixes.css` | the structural gaps of Step 6 as copy-paste CSS: the `.nav` foundation, status-dot specificity, the `.input-group` flex row, `.badge-paid` and `.avatar` alignment | always — take the whole file |
+| COPY | `references/kitchen-sink.html` | every load-bearing component rendered correctly in one page, both themes | copy markup from here instead of retyping it from prose |
+| SHELL | `references/check-build.sh` | the wiring checker: the CDN link, `tokens.css` and `bundle-fixes.css`, load order, the theme pair, `var()` names — no Node, no browser | any repo, pre-commit |
+| SHELL | `references/check-classes.sh` | greps your templates for classes the bundle doesn't define — no Node, no browser | any repo, any framework, pre-commit |
+| SHELL | `references/verify.mjs` | the same lookup against the rendered DOM, plus 19 more checks, in Playwright | before you call any screen done |
+| SHELL | `references/refresh.sh` | re-derives `classes.txt`, `icons.txt` and the token list from the live CDN and diffs them | when this skill feels stale, or a class you expect is missing |
+
+Two more files, `references/classes.txt` and `references/icons.txt`, are **LOOKUP** — never copied
+into an app, just grepped when you need to know whether a name exists.
 See *Looking a name up* at the end.
 
 **Load order is the contract:** CDN bundle → `tokens.css` → `bundle-fixes.css` → the app's own CSS
@@ -130,34 +141,36 @@ toggles classes. **Never** let the framework change the class names — that is 
 
 ## Step 1 — Design tokens
 
-Nearly every value is **baked in** — ~1400 selectors carry literal colours, which is why only the
-other build can darken them. Reference the table below; don't guess.
+**Take every value from the tables below — never guess one, and never lift one from a screenshot.**
+Nearly every value is **baked in**: ~1400 selectors carry literal colours, which is why only the
+other build can darken them.
 
-**But the bundle is not var()-free, and this is a trap.** It *references* 28 custom properties —
-`--panel-bg`, `--bg-color`, `--input-bg`, `--divider-color`, `--marine-color-light` and 23 more —
-and **defines none of them**. Only `--bg-color` carries an inline fallback, so the rest resolve to
-nothing: `.side-panel` renders transparent, focus rings vanish. Inside `login.sendpulse.com` the
-host shell supplies them; a standalone integration has no host shell and must ship them itself.
-
-It is a packaging boundary rather than a bug (Step 0): in the product those blocks come from
-`template.min.css`, which an integration does not link.
+**Ship the 28 custom properties yourself — the bundle references them and defines none.**
+`--panel-bg`, `--bg-color`, `--input-bg`, `--divider-color`, `--marine-color-light` and 23 more.
+Only `--bg-color` carries an inline fallback, so the rest resolve to nothing: `.side-panel` renders
+transparent, focus rings vanish. Inside `login.sendpulse.com` the host shell supplies them; a
+standalone integration has no host shell, so it must ship them itself. This is a packaging
+boundary, not a bug: in the product those blocks come from `template.min.css`, which an integration
+does not link. Copy `references/tokens.css` — it is all 28, light and dark. With no filesystem,
+reproduce it from the block in `adapters/chatgpt/instructions.md`; there is no shorter path, because
+the names cannot be guessed.
 
 **Copy `references/tokens.css` — never hand-write these.** Guessed values look plausible and are
 wrong: `--bg-color` is `#f2f5f5`, not `#fff`; `--base-color` is `#000`, not the `#023346` ink. The
 file holds every value that exists — the 28 light, the 12 the dark build overrides — re-verified
-against the live CDN 2026-08-21. Nine of the 28 are defined in no stylesheet at all (below), so the
-file carries the best available value for them rather than a lifted one. `references/refresh.sh`
+against the live CDN 2026-08-21. Nine of the 28 are defined in no stylesheet at all, so the file
+carries the best available value for them rather than a lifted one. `references/refresh.sh`
 re-derives it; `--vk-brand-color` is the one that cannot be generated, since no build emits it —
 it comes from the design system's own `vk-brand-color` source variable (`#5181b8`).
 
-**These 28 are the only custom properties your CSS may reference.** An existing integration's CSS
-uses about 40, because an app that gets the design system through its own build inherits a larger
-`:root` with it — on the CDN path those extras resolve to nothing. And nine of them (`--panel-heading-bg`, `--size-count`,
-`--status-color-*`) are defined **nowhere at all**, and shipped screens do read them: a heading
-painted with `var(--panel-heading-bg)` and no fallback renders transparent in every theme.
-So never copy a `var()` name out of another integration — check it against `tokens.css`, and where
-it is absent use the literal value directly (`24px`, not `var(--gutter-size-lg)`): the metrics are
-below, the colours in `references/tokens.md`.
+**Never copy a `var()` name out of another integration — check it against `tokens.css` first.**
+These 28 are the only custom properties your CSS may reference. An existing integration's CSS uses
+about 40, because an app that gets the design system through its own build inherits a larger `:root`
+with it; on the CDN path those extras resolve to nothing. Nine of the 28 (`--panel-heading-bg`,
+`--size-count`, `--status-color-*`) are defined **nowhere at all**, and shipped screens do read
+them: a heading painted with `var(--panel-heading-bg)` and no fallback renders transparent in every
+theme. Where a name is absent, use the literal value directly (`24px`, not
+`var(--gutter-size-lg)`) — the metrics are below, the colours in `references/tokens.md`.
 
 The metrics, which no class supplies for you:
 
@@ -186,7 +199,7 @@ markup from there rather than retyping it, and `examples/` shows the same classe
 into two whole screens — order, spacing and what gets left out. `references/classes.txt` is the
 full flat list.
 
-The one part of Step 2 that is not lookup, because it applies to everything in that file:
+One rule is not lookup, because it applies to everything in that catalogue:
 
 **Restraint — the plainest thing that reads correctly.** The bundle is a large vocabulary and it is
 tempting to spend it. Don't. Chrome that carries no information is what makes a screen stop looking
@@ -238,28 +251,27 @@ like SendPulse.
 
 ## Step 4 — Layout and spacing
 
-**Start from what the frame is: the whole of it.** An integration is not a web page — it is a web
-resource SendPulse opens **in an iframe** that it has already positioned, already inset, and already
-sized and scrolling. **The size depends on where the integration is shown**, so it is never a number
-the app can assume:
+**The app fills the frame it is handed and never sizes itself.** An integration is not a web page —
+it is a web resource SendPulse opens **in an iframe** that it has already positioned, already inset,
+and already sized and scrolling. **The size depends on where the integration is shown**, so it is
+never a number the app can assume:
 
 | Where | Frame |
 |---|---|
 | integration settings in the marketplace | **796px** wide |
 | a widget window | a different size, and not one to hardcode |
 
-That is the argument for the rules below rather than a detail beside them: an app that caps or
-centres itself is wrong in the settings screen and wrong by a *different* amount in a widget. The
-host owns the page chrome; the app owns whatever rectangle it is handed, and fills it. Anything the app adds on the outside
-is added *on top of* the host's own inset, so it reads as double padding and the panel stops
-meeting the frame edge. The outermost element of an integration therefore carries **no margin, no
-padding and no `max-width`**:
+So an app that caps or centres itself is wrong in the settings screen, and wrong by a *different*
+amount in a widget. The host owns the page chrome; the app owns whatever rectangle it is handed, and
+fills it. Anything the app adds on the outside is added *on top of* the host's own inset, so it
+reads as double padding and the panel stops meeting the frame edge. The outermost element of an
+integration therefore carries **no margin, no padding and no `max-width`**:
 
 - **No outer gutter.** The 24px rhythm belongs *inside* the panel — `.panel-body` already has it.
 - **No width cap on the root.** Not even 796px: in the settings screen the frame is already that
   wide, so the cap is a no-op — and in a widget of another size it leaves the frame empty on both
-  sides. A cap on the root cannot be right in both places. Caps belong on individual form
-  controls, one level in — see *Controls do not stretch* below.
+  sides. A cap on the root cannot be right in both places. Caps belong on the wrapper around
+  one form control, one level in, at 364px — *Controls do not stretch*, below.
 - **No centring.** `margin: 0 auto` is the same mistake stated differently.
 - **Full height when the screen has a footer.** A sticky action footer needs the app to be as tall
   as the frame: `html, body, #root { height: 100% }` and a flex column. Not `100vh` — inside an
@@ -375,7 +387,9 @@ Sixteen classes exist, look like they should work, and don't — `.nav-tabs` ren
 list, `.side-panel` is transparent, `.badge-status` overflows any text put inside it, a `.modal` is
 invisible. **The catalogue is `references/gaps.md`**: symptom → cause → fix, one section per class,
 indexed at the top of the file. Grep it for the class you are fighting and read that section before
-concluding you've used the class wrong.
+concluding you've used the class wrong. **No filesystem?** The whole sixteen-row index — class,
+symptom, what closes it — is reproduced under *The gaps* in `adapters/chatgpt/pocket-guide.md`;
+that table is enough to know which gap you hit, and only the argued-out cases need the full file.
 
 Most of it is boilerplate you never write: `references/tokens.css` and `references/bundle-fixes.css`
 between them close seven of the sixteen, which is why Step 0 says copy both. The rest are decisions,
@@ -384,7 +398,11 @@ and `references/gaps.md` is where they are argued out.
 ## Step 7 — Check the result mechanically
 
 Three checkers ship in `references/`. They answer different questions, and none of them replaces
-looking at the screen in both themes.
+looking at the screen in both themes. **No shell?** Then walk the checklist in
+`adapters/chatgpt/pocket-guide.md` instead — it is these same assertions in manual form, and the
+four that matter most are: every class name found in `classes.txt`, the CDN link first with
+`tokens.css` and `bundle-fixes.css` after it, every `var()` name among the 28, and the app root
+carrying no padding, cap or centring.
 
 **The wiring, before anything else.** `check-build.sh` reads the repo — no Node, no browser — and
 catches what fails silently here: a self-hosted bundle (every glyph breaks, since `url(/img/…)`
@@ -432,14 +450,6 @@ off the shipped list rather than asking the bundle, and have to: the CDN sends
 `access-control-allow-origin: https://login.sendpulse.com`, so neither a shell nor a local page can
 read the stylesheet's own rules.
 
-The other fourteen checks are the Step 6 gaps, the frame rules and the *Restraint* rules turned into
-assertions: a Bootstrap `glyphicon-*`, an unpainted `body`, missing `color-scheme`, any of the 28
-custom properties still undefined, a `font-family` that isn't Onest, text inside a `.badge-status`,
-`.list-divided` without `.list-unstyled`, unfloated `.nav-tabs` items, an `.input-group` that never
-got its `display`, a `.has-paid-badge` whose badge is missing or collapsed, an icon-only control
-with no accessible name, an `.sp-icon` touching its label, an app root that pads, caps or centres
-itself instead of filling the host frame (Step 4), and a theme switcher in the UI (Step 5).
-
 It loads the dark pass as `?theme=dark` — the host's own path — so a run also proves the app reads
 the param instead of exposing a toggle.
 
@@ -471,8 +481,10 @@ looks right — spacing, hierarchy and restraint still need your eyes on it in b
 `references/check-build.sh`, `references/check-classes.sh` and `references/verify.mjs` assert most of
 this skill mechanically — run them first (Step 7), then check by eye only what a script cannot see:
 
-- [ ] **Run the checkers.** `check-build.sh` clean on the repo, `check-classes.sh` clean over the
-      templates and, where Node is available, `verify.mjs` clean in **both** themes. Between them
+- [ ] **Run the checkers** — or, with no shell, walk the manual list in
+      `adapters/chatgpt/pocket-guide.md`. `check-build.sh` clean on the repo, `check-classes.sh`
+      clean over the templates and, where Node is available, `verify.mjs` clean in **both** themes.
+      Between them
       they cover the CDN link, both required files and their load order, the theme pair and
       `ma-dark`, `var()` names, invented classes in the source *and* the DOM, and the Step 6 gaps.
       Everything they cover is off this list.
