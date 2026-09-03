@@ -158,7 +158,9 @@ const audit = ({ known: knownList, icons: iconList, tokens, prefixes, theme }) =
       );
   }
 
-  // 11. the paid alert's badge must be its own child and must render
+  // 11. the paid alert's badge must be its own child and must render. The family ships in
+  // template.min.css, not the marketplace bundle, so check 1 reports these names as unknown —
+  // this check still holds wherever the shell's stylesheet is loaded.
   for (const el of sel(".has-paid-badge")) {
     const badge = el.querySelector(":scope > .badge-paid");
     if (!badge) add(".has-paid-badge without a .badge-paid child", label(el));

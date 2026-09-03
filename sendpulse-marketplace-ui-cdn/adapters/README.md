@@ -41,6 +41,7 @@ its description. Nothing in this `adapters/` folder is read on that path.
    [`chatgpt/pocket-guide.md`](chatgpt/pocket-guide.md) (icon rules, the palette, the known
    gaps and the pre-delivery checklist — the detail the instruction field could not hold,
    and the file the paste block tells the model to read), `references/classes.txt`,
+   `references/shell-classes.txt`,
    `references/icons.txt`, `references/components.md`, `references/gaps.md`,
    `references/tokens.md`, `references/tokens.css`, `references/bundle-fixes.css`,
    `references/starter.html`, `references/kitchen-sink.html`,
@@ -94,7 +95,8 @@ support at all — the same instructions apply there as to any file-free chat wi
 `chatgpt/instructions.md`, `chatgpt/pocket-guide.md`, `gemini/GEMINI.md` and the Cursor rule
 are **derived** from `SKILL.md`. They deliberately carry only the slow-moving facts — the non-negotiables, the
 metrics, the control widths, the frame and theme rules — and never the generated lists, so
-`references/refresh.sh` can update `classes.txt` and `icons.txt` without touching them.
+`references/refresh.sh` can update `classes.txt`, `shell-classes.txt` and `icons.txt` without
+touching them.
 When one of those slow-moving numbers does change in `SKILL.md`, change it here in the same
 commit.
 

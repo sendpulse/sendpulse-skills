@@ -144,7 +144,7 @@ and restraint need human eyes in both themes — say so rather than calling a sc
 
 **When the live bundle and these instructions disagree, the bundle wins.** The lists in Knowledge
 are generated from the CDN and dated; if a name you expect is missing, say the list may be stale
-rather than inventing a class. Verified against the build of **2026-08-25**.
+rather than inventing a class. Verified against the build of **2026-09-03**.
 
 ---
 
@@ -272,7 +272,9 @@ class names — is load-bearing and not guessable from `classes.txt` alone.
 <!-- badge-status: a 10x10 dot, not a text pill — text goes in a sibling, never inside it -->
 <span class="badge badge-status badge-status-success"></span> Connected
 
-<!-- paid-plan gate: badge must be the alert's OWN child, and must render — &nbsp;, not empty -->
+<!-- paid-plan gate: badge must be the alert's OWN child, and must render — &nbsp;, not empty.
+     The paid family ships in template.min.css (the shell's stylesheet), not the marketplace
+     bundle, so classes.txt does not list it -->
 <div class="alert alert-paid has-paid-badge">
   <span class="badge badge-paid">&nbsp;</span>
   Your CRM pricing plan has expired.

@@ -56,7 +56,10 @@
             <li><a href="#">Log <span class="badge">7</span></a></li>
           </ul>
 
-          <!-- Plan gate: one per screen, at the top of what it restricts. -->
+          <!-- Plan gate: one per screen, at the top of what it restricts.
+               The paid family lives in template.min.css (the shell's stylesheet), not in the
+               marketplace bundle — so it paints when embedded, and check-classes.sh flags the
+               names as unknown. Standalone: link template.min.css too, or use .label-paid. -->
           <div class="alert alert-paid has-paid-badge spacing-bottom-lg">
             <span class="badge badge-paid">&nbsp;</span>
             Importing orders as CRM deals needs a CRM plan.
@@ -234,6 +237,8 @@
             </div>
           </div>
 
+          <!-- Selector boxes live in template.min.css, not the marketplace bundle (2026-09-03):
+               they render inside the shell, and check-classes.sh reports them as unknown. -->
           <h6 class="text-uppercase font-size-13 text-muted spacing-bottom-xs">Selector boxes</h6>
           <div class="selector-boxes spacing-bottom-lg">
             <div class="selector-box">

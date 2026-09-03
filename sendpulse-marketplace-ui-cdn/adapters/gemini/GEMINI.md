@@ -12,7 +12,9 @@ dropdowns, badges, `sp_icons`, colour tokens or layout inside the host iframe �
 
 - `references/components.md` — the component catalogue: every load-bearing class with its markup
 - `references/gaps.md` — sixteen classes that look like they work and don't: symptom → cause → fix
-- `references/classes.txt` · `references/icons.txt` — 1411 class names, 536 icon names; grep, don't guess
+- `references/classes.txt` · `references/icons.txt` — 1340 class names, 535 icon names; grep, don't guess
+- `references/shell-classes.txt` — 217 more the host shell's `template.min.css` defines: they paint
+  when embedded in login.sendpulse.com, not on a standalone page
 - `references/tokens.css` — the 28 custom properties the bundle reads and never defines
 - `references/bundle-fixes.css` — the structural gaps as copy-paste CSS
 - `references/tokens.md` — the light palette, for when no semantic class covers the case

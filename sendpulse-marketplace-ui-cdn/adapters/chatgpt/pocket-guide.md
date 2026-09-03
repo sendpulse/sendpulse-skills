@@ -16,7 +16,7 @@ this file disagree, the bundle wins.
 ```
 
 - **Always both classes** — `sp-icon` (the `sp_icons` font) *and* `icon-NAME`. No inner text.
-- **536 names live in `icons.txt`**, with the `icon-` prefix omitted there. Visual browser:
+- **535 names live in `icons.txt`**, with the `icon-` prefix omitted there. Visual browser:
   https://sp-icons.netlify.app/. A name that is not in that file does not exist — don't invent one.
 - **No font-size of its own.** The glyph inherits from its context (16px in body text). Colour is
   inherited too: tint with `.color-primary` / `.color-default` / `.color-danger`, not inline styles.
@@ -24,7 +24,7 @@ this file disagree, the bundle wins.
   `.dropdown-menu a .sp-icon` 5px, `.dropdown-item-long .sp-icon` 10px). Anywhere else the label
   sits flush against the glyph — add `.margin-right-5`. That utility and `-10` / `-30` are the only
   three defined.
-- **The name does not tell you the shape.** 536 glyphs share a handful of stems, and the plainest
+- **The name does not tell you the shape.** 535 glyphs share a handful of stems, and the plainest
   name is often the decorated variant: `icon-plus` is a plus inside a rounded box, `icon-plus2` and
   `icon-add` are pluses inside a circle, and the **bare** plus is `icon-plus-add`. Look at the
   candidates before picking one.
@@ -78,7 +78,7 @@ before concluding you used the class wrong.** The index:
 | `.nav-tabs` | renders as a bulleted vertical list | `bundle-fixes.css` |
 | `.badge-status-*` | the dot is grey inside a `.list-group-item` | `bundle-fixes.css` |
 | `.input-group` | a number and its unit `<select>` sit far apart | `bundle-fixes.css` |
-| `.badge-paid` | sits too low beside a label | `bundle-fixes.css` |
+| `.badge-paid` | gone from the bundle — renders as an empty span | use `.label-paid` |
 | `.avatar` | hangs below the label's baseline in a dropdown | `bundle-fixes.css` |
 | `.sp-icon` | the glyph and its label touch | `.margin-right-5` |
 | `.badge-status` | text put inside it overflows | don't put text in it |

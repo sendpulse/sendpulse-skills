@@ -19,6 +19,9 @@
 set -eu
 
 BUNDLE_URL="https://cdn.sendpulse.com/dist/css/sp-marketplace-app-ui.min.css"
+# The shell's own stylesheet. An integration never links it, but the host page does, so classes it
+# alone defines (the paid/plan family, .selector-box*, .empty-alert) do render when embedded.
+SHELL_URL="https://cdn.sendpulse.com/dist/css/template.min.css"
 here=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 write=0
 [ "${1:-}" = "--write" ] && write=1
@@ -30,13 +33,22 @@ drift=0
 printf 'fetching %s\n' "$BUNDLE_URL"
 curl -fsS -o "$tmp/bundle.css" "$BUNDLE_URL" || {
   echo "could not fetch the bundle — check the URL and your network" >&2; exit 2; }
-printf '  %s bytes\n\n' "$(wc -c < "$tmp/bundle.css" | tr -d ' ')"
+printf '  %s bytes\n' "$(wc -c < "$tmp/bundle.css" | tr -d ' ')"
+printf 'fetching %s\n' "$SHELL_URL"
+curl -fsS -o "$tmp/shell.css" "$SHELL_URL" || {
+  echo "could not fetch the shell stylesheet — check the URL and your network" >&2; exit 2; }
+printf '  %s bytes\n\n' "$(wc -c < "$tmp/shell.css" | tr -d ' ')"
 
 # --- classes ---------------------------------------------------------------------------------
 # icon-*/glyphicon-* excluded on purpose: the first is icons.txt, the second is the inherited
 # Bootstrap 3 icon font, left out so it cannot be picked by accident (SKILL.md non-negotiable #6).
 grep -oE '\.[a-zA-Z_][a-zA-Z0-9_-]*' "$tmp/bundle.css" | sed 's/^\.//' | sort -u \
   | grep -Ev '^(icon|glyphicon)-' > "$tmp/classes.txt"
+
+# --- classes the shell's template.min.css defines and the marketplace bundle does not -----------
+grep -oE '\.[a-zA-Z_][a-zA-Z0-9_-]*' "$tmp/shell.css" | sed 's/^\.//' | sort -u \
+  | grep -Ev '^(icon|glyphicon)-' > "$tmp/shell-all.txt"
+comm -13 "$tmp/classes.txt" "$tmp/shell-all.txt" > "$tmp/shell-classes.txt"
 
 # --- icons -----------------------------------------------------------------------------------
 grep -oE '\.icon-[a-zA-Z0-9_-]+' "$tmp/bundle.css" | sed 's/^\.icon-//' | sort -u > "$tmp/icons.txt"
@@ -60,6 +72,7 @@ report() {  # name  fresh  shipped
 }
 
 report classes.txt "$tmp/classes.txt" "$here/classes.txt"
+report shell-classes.txt "$tmp/shell-classes.txt" "$here/shell-classes.txt"
 report icons.txt   "$tmp/icons.txt"   "$here/icons.txt"
 report tokens.css  "$tmp/vars.txt"    "$tmp/tokens.txt"
 
@@ -73,13 +86,14 @@ if [ "$drift" -eq 0 ]; then
 fi
 
 if [ "$write" -eq 1 ]; then
-  cp "$tmp/classes.txt" "$here/classes.txt"
-  cp "$tmp/icons.txt"   "$here/icons.txt"
-  echo 'classes.txt and icons.txt rewritten.'
+  cp "$tmp/classes.txt"       "$here/classes.txt"
+  cp "$tmp/shell-classes.txt" "$here/shell-classes.txt"
+  cp "$tmp/icons.txt"         "$here/icons.txt"
+  echo 'classes.txt, shell-classes.txt and icons.txt rewritten.'
   echo 'Now re-read the drift above: a dropped class may be named in SKILL.md or kitchen-sink.html'
   echo '(grep for it), and any token change needs its values from tokens.css'"'"'s header command.'
 else
-  echo 'nothing written. Re-run with --write to update classes.txt and icons.txt,'
+  echo 'nothing written. Re-run with --write to update classes.txt, shell-classes.txt and icons.txt,'
   echo 'then check whether SKILL.md or kitchen-sink.html names anything that disappeared.'
 fi
 exit 1

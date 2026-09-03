@@ -14,7 +14,8 @@
             top of the gated `.panel-body`, its `.badge-paid` as the alert's own child carrying
             `&nbsp;` (an empty inline span collapses and the 48px inset then looks like a bug), the
             upgrade link inline in the copy, and the gated control `disabled` with a small
-            `.badge-paid-sm` beside its label. Nothing else on the screen turns purple.
+            `.badge-paid-sm` beside its label. Nothing else on the screen turns purple. The family
+            ships in `template.min.css`, the shell's stylesheet — see components.md.
     components.md, Lists
             Cards, not a table. That is a content decision the catalogue makes for you: a table is
             for uniform rows with no per-row state, cards once a row has state and actions — and
@@ -89,7 +90,8 @@
         </p>
 
         <!-- Rendered only when the account lacks the plan. The badge must be the alert's own child,
-             and the upgrade link is inline HTML in the copy — escape it and every locale loses it. -->
+             and the upgrade link is inline HTML in the copy — escape it and every locale loses it.
+             These classes come from template.min.css, not the marketplace bundle. -->
         <div class="alert alert-paid has-paid-badge spacing-bottom-lg">
           <span class="badge badge-paid">&nbsp;</span>
           Order sync is available on a paid pricing plan.

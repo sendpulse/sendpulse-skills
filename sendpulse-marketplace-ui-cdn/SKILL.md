@@ -6,8 +6,14 @@ description: >
   framework or none. Building a settings or connection screen, fixing dark theme, or panels
   rendering transparent with focus rings missing. Forms, buttons, modals, tables, dropdowns, badges,
   `sp_icons`, colour tokens, layout utilities, `?theme=dark` / `ma-dark` light and dark builds,
-  layout inside the host iframe.
-version: 1.1.0
+  layout inside the host iframe. Use this skill whenever the user wants to: "make a settings
+  screen", "build the connection page", "fix dark theme", "panel looks transparent", "focus ring
+  missing", "сделай экран настроек", "почини тёмную тему", "зроби сторінку налаштувань", "полагодь
+  темну тему", "додай іконку sp_icons". NOT for an app whose `package.json` installs
+  `@sendpulse/styles` from npm (use `sendpulse-marketplace-ui-npm`) and NOT for how a whole
+  integration screen is composed page-to-page — panel rhythm, section order, connected-item rows
+  (use `sp-integration-screen`).
+version: 1.2.1
 license: MIT
 metadata:
   author: SendPulse
@@ -21,6 +27,15 @@ fewer glyphs. SendPulse screens are deliberately plain; the shortest correct mar
 style, not a shortcut. Two consequences, each stated in full where it applies: one `.panel` flush to
 the frame does the screen layout (Step 4), and nothing is added that carries no information (Step 2,
 *Restraint*). Nothing here needs a second skill to be usable.
+
+## Route to the right skill first
+
+| User goal | Use |
+|---|---|
+| Classes, tokens, icons for an app that links the CDN stylesheet | **this skill** |
+| Classes, tokens, icons for an app whose `package.json` installs `@sendpulse/styles` | `sendpulse-marketplace-ui-npm` — this skill's wiring (Step 0) does not apply there |
+| How a whole integration screen is composed — panel rhythm, section order, connected-item rows, the plan-gate alert, the sticky footer | `sp-integration-screen` — this skill owns the class vocabulary, not the page anatomy |
+| Angular repo layout, LESS/BEM conventions, translation keys | `sendpulse-ui` |
 
 **Scope: the CDN stylesheet.** Everything about wiring here — Step 0's `<link>` and load order,
 the custom properties Step 1 has you ship, the two theme builds of Step 5 — assumes the app gets
@@ -57,7 +72,7 @@ covers installing it in ChatGPT, Gemini, Cursor and Copilot.
 >    without their foundation. Check `references/gaps.md` before you debug one.
 > 8. **Restraint is a rule, not taste** — the plainest markup that reads correctly (Step 2).
 
-Canonical sources (lists verified against the live bundle **2026-08-25**, `references/gaps.md`
+Canonical sources (lists verified against the live bundle **2026-09-03**, `references/gaps.md`
 built against the 2026-08-20 build and re-measured in Chrome 2026-08-25). **If today is more than three months past that date, run
 `references/refresh.sh` before trusting any count, class list or token value in this file** — it
 takes seconds, needs nothing but `curl`, and prints only what drifted. The bundle ships
@@ -95,10 +110,11 @@ attachments; `adapters/README.md` maps that route per tool.
 | SHELL | `references/check-build.sh` | the wiring checker: the CDN link, `tokens.css` and `bundle-fixes.css`, load order, the theme pair, `var()` names — no Node, no browser | any repo, pre-commit |
 | SHELL | `references/check-classes.sh` | greps your templates for classes the bundle doesn't define — no Node, no browser | any repo, any framework, pre-commit |
 | SHELL | `references/verify.mjs` | the same lookup against the rendered DOM, plus 19 more checks, in Playwright | before you call any screen done |
-| SHELL | `references/refresh.sh` | re-derives `classes.txt`, `icons.txt` and the token list from the live CDN and diffs them | when this skill feels stale, or a class you expect is missing |
+| SHELL | `references/refresh.sh` | re-derives `classes.txt`, `shell-classes.txt`, `icons.txt` and the token list from the live CDN and diffs them | when this skill feels stale, or a class you expect is missing |
 
-Two more files, `references/classes.txt` and `references/icons.txt`, are **LOOKUP** — never copied
-into an app, just grepped when you need to know whether a name exists.
+Three more files, `references/classes.txt`, `references/shell-classes.txt` and
+`references/icons.txt`, are **LOOKUP** — never copied into an app, just grepped when you need to
+know whether a name exists, and which stylesheet defines it.
 See *Looking a name up* at the end.
 
 **Load order is the contract:** CDN bundle → `tokens.css` → `bundle-fixes.css` → the app's own CSS
@@ -229,7 +245,7 @@ like SendPulse.
 <i class="sp-icon icon-envelope" aria-hidden="true"></i>
 ```
 - Always both classes: `sp-icon` (the `sp_icons` font) **and** `icon-NAME`. No inner text.
-- 536 names in `references/icons.txt`, visual browser at https://sp-icons.netlify.app/.
+- 535 names in `references/icons.txt`, visual browser at https://sp-icons.netlify.app/.
 - **No font-size of its own** — the glyph inherits from its context (16px in body text). 18px is a
   context rule, not a default: `.btn-more-action .sp-icon` and
   `.dropdown-item-options > .btn > .sp-icon` are the rules that set it. Colour is inherited too;
@@ -243,7 +259,7 @@ like SendPulse.
 - Brand marks come from a separate `social-icon` font, addressed by number: `.social-icon.social-icon-3`
   (ids 1, 3–8, 1000–1004, 1006, 1007 — there is no 1005). There is no name-based alias — check `references/classes.txt`.
 - Never mix in Font Awesome, Material Icons, or inline SVG for something `sp_icons` already has.
-- **The name does not tell you the shape.** 536 glyphs share a handful of stems, and the plainest
+- **The name does not tell you the shape.** 535 glyphs share a handful of stems, and the plainest
   name is often the decorated variant: `icon-plus` is a plus inside a rounded box, `icon-plus2` and
   `icon-add` are pluses inside a circle, and the **bare** plus is `icon-plus-add`. Look at the
   candidates in the icon browser (or render them side by side) before picking one — the cost of
@@ -427,7 +443,8 @@ tools/sp-ui/check-classes.sh --app-prefix app- $(find src -name '*.html')
 
 It reads `class="…"`, `className="…"` and `className={\`…\`}` out of the source, so plain HTML,
 JSX, Angular and Vue templates all work, and reports every name that is in neither `classes.txt`
-nor `icons.txt`. Names your code assembles at runtime (`"badge-status-" + status`) are invisible to
+nor `icons.txt`. Names that `shell-classes.txt` covers are listed apart and do not fail the check:
+the shell defines them, so they paint when embedded and not on a standalone page. Names your code assembles at runtime (`"badge-status-" + status`) are invisible to
 it, and nothing about rendering is checked — for that:
 
 **With Node — the rendered page.** `references/verify.mjs` opens it in real Chrome, **in both
@@ -512,9 +529,22 @@ I inventing it?* — and a miss means don't use the name, not "add a rule for it
 so `grep -x` is an exact check and a bare `grep` browses a family.
 
 ```bash
-grep -qx 'panel-title'  references/classes.txt   # 1411 classes the bundle defines (2026-08-21)
-grep    -i 'plus'       references/icons.txt     # 536 sp_icons names, `icon-` prefix omitted
+grep -qx 'panel-title'  references/classes.txt   # 1340 classes the bundle defines (2026-09-03)
+grep    -i 'plus'       references/icons.txt     # 535 sp_icons names, `icon-` prefix omitted
 references/refresh.sh                            # both lists are generated — re-derive, don't trust the date
+```
+
+**`classes.txt` is the marketplace bundle, not everything the shell paints.** As of 2026-09-03 the
+`paid`/plan family (`.alert-paid`, `.badge-paid`, `.has-paid-badge`, `.badge-pro`, `.link-paid`,
+the `plan-*` modifiers, the callout arrows), the `.selector-box*` family and `.empty-alert` live in
+`template.min.css` — the SendPulse shell's own stylesheet, same CDN host. Embedded in the shell
+they render normally; on a standalone page that links only the marketplace bundle they do not.
+Those 217 names are `references/shell-classes.txt`, and `check-classes.sh` reports them apart from
+invented ones. Link `https://cdn.sendpulse.com/dist/css/template.min.css` when developing such a
+page standalone.
+
+```bash
+grep -qx 'selector-box' references/shell-classes.txt  # 217 names only the shell defines
 ```
 
 The bundle also still carries **97 Bootstrap `glyphicon-*` classes**, a second icon font inherited
