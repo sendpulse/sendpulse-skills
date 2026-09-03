@@ -94,7 +94,9 @@ body {
 
 /* `.badge-paid` is `vertical-align:sub`, with another -2px on `.badge-paid-sm` — sized for a
    button's caps. Beside 16px label text — a checkbox label, a form label, or the bold title of a
-   switcher row — it drops below the baseline. */
+   switcher row — it drops below the baseline.
+   The family itself lives in `template.min.css` (the shell's stylesheet), not in the marketplace
+   bundle — so this block matters wherever that shell is loaded, which is the embedded case. */
 .checkbox label .badge-paid,
 .control-label .badge-paid,
 .switcher-flex-holder .badge-paid {

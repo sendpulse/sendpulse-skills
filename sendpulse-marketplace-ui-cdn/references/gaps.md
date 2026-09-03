@@ -105,6 +105,11 @@ not 16px label text.
 **Fix.** `vertical-align:middle;top:0` scoped to those labels. Already written: copy
 `references/bundle-fixes.css`, which covers all three sizes.
 
+**Note (2026-09-03).** The whole paid family moved out of `sp-marketplace-app-ui.min.css` into
+`template.min.css`, so this gap only bites where the shell's stylesheet is loaded — which is the
+normal embedded case. On a standalone page linking the marketplace bundle alone the badge does not
+render at all; see components.md, "Plan gating".
+
 ## `.avatar` — hangs below the label's baseline in a dropdown
 
 In a dropdown trigger or a menu row.

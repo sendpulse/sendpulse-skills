@@ -5,6 +5,49 @@ All notable changes to the SendPulse Marketplace UI kit (CDN route). Format foll
 [SemVer](https://semver.org/) — MAJOR for a rewrite of the rules or structure, MINOR for new
 guidance or reference files, PATCH for corrections to existing facts.
 
+## [1.2.1] — 2026-09-03
+
+### Added
+
+- `references/shell-classes.txt` — the 217 class names that only `template.min.css`, the SendPulse
+  shell's own stylesheet, defines. `refresh.sh` now derives it alongside the other two lists, and
+  `check-classes.sh` reports these apart from invented names instead of failing on them: they paint
+  inside `login.sendpulse.com` and not on a standalone page.
+
+### Changed
+
+- `references/classes.txt` and `references/icons.txt` re-derived from the live bundle:
+  1411 → 1340 classes, 536 → 535 icons (`icon-circle-wrapper`). Nothing was added. Token values are
+  unaffected — all 28 custom properties the bundle reads are still supplied by `tokens.css`. Counts
+  and the verification date updated in `SKILL.md`, `README.md` and `adapters/`.
+- **The 71 dropped classes were not deleted — they moved.** The `paid`/plan family
+  (`.alert-paid`, `.badge-paid`, `.has-paid-badge`, `.badge-pro`, `.badge-paid-lg`, `.link-paid`,
+  `.plan-crm_basic`, `.plan-crm_lite`, `.alert-arrow-top-right`, `.has-left-arrow`, `.label-promo`),
+  the seventeen `.selector-box*` classes, `.empty-alert`, the `welcome-*` onboarding set, the
+  `minicolors-*` picker, `in-app-survey-*` and `bannedBar*` all still exist, styled as before, in
+  `template.min.css` on the same CDN host — verified in the live file and in the package source,
+  where they come from `_ui-paid-elements.less` / `_onboarding.less`, imported by `template.less`
+  and no longer by `sp-marketplace-app-ui.less`. So they render for an integration embedded in the
+  shell, which is the normal case, and not on a standalone page.
+- `components.md` ("Plan gating", "Selector boxes"), `gaps.md`, `SKILL.md` and `adapters/` now state
+  that boundary. The markup itself is unchanged — it was correct.
+
+### Fixed
+
+- The glyph note in `components.md` said `.badge-paid:after` resolves `/img/my/sp-i-promo-md.svg`
+  against the marketplace bundle's origin. The rule lives in `template.min.css` now; same origin,
+  same outcome, but the sentence named the wrong stylesheet.
+
+## [1.2.0] — 2026-08-28
+
+### Added
+
+- Description now carries quoted EN/RU/UK trigger phrases and a "NOT for…" clause, so the skill
+  fires on how SendPulse devs actually ask and hands off cleanly to `sendpulse-marketplace-ui-npm`
+  and `sp-integration-screen` instead of silently not matching.
+- A "Route to the right skill first" table ahead of Step 0, pointing at the npm-route sibling skill,
+  `sp-integration-screen` (page-level anatomy) and `sendpulse-ui` (repo layout).
+
 ## [1.1.0] — 2026-08-27
 
 ### Added

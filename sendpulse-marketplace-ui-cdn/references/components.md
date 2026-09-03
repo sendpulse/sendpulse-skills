@@ -145,8 +145,25 @@ never an alert injected at the top of the page.
 
 SendPulse features sit behind pricing plans, so an integration
 that touches a paid feature (CRM, telephony, a Pro-only field) must say so rather than silently
-disabling a control. The bundle ships a whole purple `paid` family for exactly this — use it, never
-a hand-written "please upgrade" box.
+disabling a control.
+
+**Read this before you copy the markup below.** The `paid` family is no longer in
+`sp-marketplace-app-ui.min.css` — it moved to **`template.min.css`**, the SendPulse shell's own
+stylesheet, on the same CDN host (verified 2026-09-03). It is not gone: `.alert.alert-paid`
+(`rgba(119,56,237,.1)`, 8px radius, no border), the 18px gradient `.badge-paid` disc, `.badge-pro`,
+`.has-paid-badge`, `.badge-paid-lg`, `.link-paid`, `.plan-crm_basic`, `.plan-crm_lite`,
+`.alert-arrow-top-right` and `.has-left-arrow` all still exist there, styled exactly as before.
+
+What follows from that:
+
+- **Embedded in the SendPulse shell** — the host page already links `template.min.css`, so the
+  markup below renders correctly and nothing changes for you. This is the normal case.
+- **A standalone page that links only the marketplace bundle** — none of it paints. Link
+  `https://cdn.sendpulse.com/dist/css/template.min.css` as well, or use `.label-paid`, which the
+  marketplace bundle still styles end to end.
+- `references/classes.txt` covers the marketplace bundle only, so `check-classes.sh` reports every
+  name in this section as unknown. That is the checker being literal, not a bug in your markup —
+  confirm the page runs inside the shell and move on.
 
 ```html
 <!-- feature unavailable on the current plan -->
@@ -170,8 +187,9 @@ a hand-written "please upgrade" box.
   `.plan-standard` `.plan-pro` `.plan-enterprise` `.plan-crm_basic` `.plan-crm_lite`. The same
   modifiers on `.alert-paid` tint the alert to match that plan.
 - Rest of the family: `.btn-paid` / `.link-paid` (purple call to action), `.label-paid` (gradient
-  pill), `.badge-pro`, `.badge-paid-bf` (dark Black-Friday pill). Callout arrows:
-  `.has-top-arrow` / `.has-left-arrow` / `.has-bottom-arrow`, nudged by `.alert-arrow-top-right`.
+  pill — **the only one still in the marketplace bundle**), `.badge-pro`, `.badge-paid-bf` (dark
+  Black-Friday pill). Callout arrows: `.has-top-arrow` / `.has-left-arrow` / `.has-bottom-arrow`,
+  nudged by `.alert-arrow-top-right`.
 - **Where it goes.** One alert at the top of the gated page's `.panel-body`, rendered only when the
   account lacks the plan, with the gated controls `disabled` and a small `.badge-paid` beside each.
   The copy holds the upgrade link as inline HTML, so it must be rendered as markup rather than
@@ -180,14 +198,15 @@ a hand-written "please upgrade" box.
 
 **The glyph's URL needs nothing from you.** `.badge-paid:after` loads
 `url(/img/my/sp-i-promo-md.svg)`, root-relative — which resolves against the *stylesheet's* origin,
-so linking the CDN it lands on `cdn.sendpulse.com` and works (verified 200, 2026-08-21). Change
-nothing. It only breaks if the CSS is compiled or vendored into your own origin, which is
-non-negotiable #1 restated: this badge is the cheapest way to notice you did.
+so served from `template.min.css` on the CDN it lands on `cdn.sendpulse.com` and works. It only
+breaks if that CSS is compiled or vendored into your own origin, which is non-negotiable #1
+restated: this badge is the cheapest way to notice you did.
 
 ## Labels & badges
 
 `.label` + `.label-primary|success|warning|danger|info|default`, plus SendPulse
-extras (`.label-sp-default`, `.label-outlined`, `.label-pro`, `.label-promo`, `.label-tag`).
+extras (`.label-sp-default`, `.label-outlined`, `.label-pro`, `.label-tag`; `.label-promo`
+is in `template.min.css`, not the marketplace bundle).
 A count is a plain **`.badge`** — a 14px pill on `#465152`, `vertical-align:middle`, and the bundle
 already nudges it where it belongs: `.nav-tabs > li > a .badge{margin-top:-1px}`,
 `.nav-pills > li > a > .badge{margin-left:3px}`, `.well .badge, td .badge{margin-top:-1px}`. So a
@@ -275,3 +294,7 @@ The SendPulse pattern for "pick one of these options" cards:
 `.selector-boxes > .selector-box` with `.selector-box-icon` (+ colour modifier `-blue|-marine|
 -purple|-red|-violet|-yellow`), `.selector-box-title`, `.selector-box-descr`, `.selector-box-disabled`.
 Prefer this over hand-rolled radio cards.
+
+Same caveat as the paid family (2026-09-03): all seventeen classes now live in `template.min.css`,
+not in the marketplace bundle. Inside the SendPulse shell they render; on a standalone page link
+`template.min.css` too. `check-classes.sh` will report them as unknown either way.

@@ -2,6 +2,10 @@
 # Does every class in these templates exist in the bundle? No Node, no browser, no framework —
 # just grep, so it runs in any repo and in a pre-commit hook.
 #
+# Names that only the shell's `template.min.css` defines (shell-classes.txt: the paid/plan family,
+# .selector-box*, .empty-alert) are listed separately and do not fail the check — they paint inside
+# login.sendpulse.com and nowhere else.
+#
 #   ./check-classes.sh $(find src -name '*.html')
 #   ./check-classes.sh --app-prefix app- src/app/*.component.html
 #   ./check-classes.sh --app-prefix rz- --app-prefix settings- $(find resources -name '*.html')
@@ -48,7 +52,7 @@ if [ -n "$prefixes" ]; then
   pat=${pat#|}
 fi
 
-known=$(mktemp); used=$(mktemp)
+known=$(mktemp); used=$(mktemp); shell=$(mktemp)
 
 # Everything the bundle styles, plus what bundle-fixes.css adds, plus the light theme hook the
 # bundle has no rule for.
@@ -59,12 +63,17 @@ known=$(mktemp); used=$(mktemp)
   echo ma-light
 } | sort -u > "$known"
 
+# Classes only `template.min.css` defines — the shell's own stylesheet. An integration never links
+# it, but the host page does, so these render when embedded and render as nothing standalone. They
+# are reported apart from invented names and do not fail the check.
+sort -u "$here/shell-classes.txt" > "$shell"
+
 # Two passes: quoted attributes (either quote style), then backtick templates, which may contain
 # quotes inside their ${…} interpolations and so need their own delimiter. Newlines are flattened
 # first so an attribute wrapped across lines is still one match. Interpolations — `${…}` in JSX and
 # `{{…}}` in Angular/Vue templates — are dropped: a name assembled at runtime cannot be checked
 # from source, and leaving them in reports the expression as an invented class.
-flat=$(mktemp); trap 'rm -f "$known" "$used" "$flat"' EXIT
+flat=$(mktemp); trap 'rm -f "$known" "$used" "$shell" "$flat"' EXIT
 cat "$@" | tr '\n' ' ' > "$flat"
 {
   grep -oE '(class|className)="[^"]*"' "$flat" | sed 's/^[^"]*"//; s/"$//'
@@ -85,8 +94,23 @@ if [ -n "$pat" ]; then
 fi
 missing=$(printf '%s\n' "$missing" | grep -vE '^$' || true)
 
+# Split off the ones the shell supplies before deciding whether anything is actually wrong.
+fromshell=$(printf '%s\n' "$missing" | grep -Fxf "$shell" || true)
+missing=$(printf '%s\n' "$missing" | grep -Fxvf "$shell" || true)
+missing=$(printf '%s\n' "$missing" | grep -vE '^$' || true)
+
+report_shell() {
+  [ -n "$fromshell" ] || return 0
+  echo
+  echo "From the shell's template.min.css, not the marketplace bundle:"
+  printf '%s\n' "$fromshell" | sed 's/^/  · /'
+  echo "These paint when the page runs inside login.sendpulse.com, and not at all on a standalone"
+  echo "page — link https://cdn.sendpulse.com/dist/css/template.min.css there, or avoid them."
+}
+
 if [ -z "$missing" ]; then
-  echo "clean — $(wc -l < "$used" | tr -d ' ') classes, all defined by the bundle"
+  echo "clean — $(wc -l < "$used" | tr -d ' ') classes, all defined by the bundle or the shell"
+  report_shell
   exit 0
 fi
 
@@ -96,6 +120,8 @@ printf '%s\n' "$missing" | sed 's/^/  • /'
 echo
 echo "Either the class is invented — find the real one in classes.txt — or it is your own,"
 echo "in which case declare it: --app-prefix <prefix> (repeatable, or comma-separated)."
+echo
+report_shell
 echo
 echo "classes.txt is the CDN marketplace bundle. An app that receives the design system through"
 echo "its own build has a larger vocabulary, so a name missing here may still be styled there —"

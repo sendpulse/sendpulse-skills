@@ -126,7 +126,6 @@ chevron-right
 chevron-up
 chrome
 circle
-circle-wrapper
 clipboard
 clipboard-2
 clock

@@ -25,7 +25,8 @@ It's a plain folder — `SKILL.md` (instructions), `examples/` (whole screens) a
 - **The bundle's gaps, filled** — the 28 custom properties it reads and never defines, and the
   structural holes it leaves, both as copy-paste files rather than prose.
 - **Theming discipline** — `?theme=dark` from the host, `ma-dark`, and app CSS that survives both.
-- **Grep-able truth** — 1411 classes and 536 icon names as flat lists, so a name gets checked
+- **Grep-able truth** — 1340 classes and 535 icon names as flat lists (plus 217 the host shell
+  supplies), so a name gets checked
   instead of guessed.
 - **Checkers** — the repo's wiring, templates against the class list, and the rendered DOM against
   20 rules.
@@ -50,7 +51,8 @@ references/
   tokens.css                    # the 28 custom properties the bundle reads and never defines
   bundle-fixes.css              # the structural gaps the bundle leaves, as copy-paste CSS
   kitchen-sink.html             # every load-bearing component rendered correctly
-  classes.txt · icons.txt       # 1411 classes, 536 sp_icons names — grep-able lookup
+  classes.txt · icons.txt       # 1340 classes, 535 sp_icons names — grep-able lookup
+  shell-classes.txt             # 217 more the shell's template.min.css defines, the bundle doesn't
   check-build.sh                # wiring: the CDN link, tokens.css, bundle-fixes.css, load order
   check-classes.sh              # greps templates for classes the bundle doesn't define. No Node
   verify.mjs                    # the same check against the rendered DOM, +19 more, in Playwright
