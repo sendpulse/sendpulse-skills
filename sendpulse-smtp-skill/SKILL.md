@@ -14,7 +14,7 @@ license: MIT
 metadata:
   author: SendPulse
   homepage: https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-smtp-skill
-  api-docs: https://sendpulse.com/integrations/api/smtp
+  api-docs: https://sendpulse.com/integrations/api/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill
 ---
 
 # SendPulse SMTP Skill
@@ -183,5 +183,5 @@ conversation when the skill is first used:
 
 If web access is unavailable, skip silently. Never block the user's task on the
 version check. When this skill and the live SendPulse documentation at
-https://sendpulse.com/integrations/api/smtp disagree, the live documentation wins —
+https://sendpulse.com/integrations/api/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill disagree, the live documentation wins —
 say so and prefer it.

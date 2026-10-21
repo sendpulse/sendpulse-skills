@@ -8,7 +8,7 @@ description: >
   with mailing lists ("создать рассылку", "адресная книга", "add subscribers",
   "import contacts", "segment my list", "schedule a campaign", "campaign statistics",
   "open rate", "why is my campaign not sending"), or automate bulk email via the
-  SendPulse API (https://sendpulse.com/integrations/api/bulk-email). NOT for coding
+  SendPulse API (https://sendpulse.com/integrations/api/bulk-email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill). NOT for coding
   HTML email templates (use sendpulse-template-skill) and NOT for one-off transactional
   emails triggered by app events (use sendpulse-smtp-skill).
 version: 1.1.1
@@ -16,7 +16,7 @@ license: MIT
 metadata:
   author: SendPulse
   homepage: https://github.com/sendpulse/sendpulse-skills/tree/main/sendpulse-email-skill
-  api-docs: https://sendpulse.com/integrations/api/bulk-email
+  api-docs: https://sendpulse.com/integrations/api/bulk-email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill
 ---
 
 # SendPulse Email Service Skill
@@ -174,5 +174,5 @@ access, you MAY check once per conversation when the skill is first used:
    continue with the current version.
 
 Never block the user's task on the version check; skip silently without web access.
-When this skill and the live docs at https://sendpulse.com/integrations/api/bulk-email
+When this skill and the live docs at https://sendpulse.com/integrations/api/bulk-email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill
 disagree, the live documentation wins — say so and prefer it.

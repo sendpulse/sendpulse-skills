@@ -3,7 +3,7 @@
 Base URL: `https://api.sendpulse.com`
 Auth: `Authorization: Bearer <API key or OAuth token>` on every request.
 Content type: `application/json` unless noted.
-Live documentation (source of truth): https://sendpulse.com/integrations/api/bulk-email
+Live documentation (source of truth): https://sendpulse.com/integrations/api/bulk-email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill
 
 ## Authorization
 

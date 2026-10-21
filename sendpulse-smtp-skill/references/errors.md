@@ -67,7 +67,7 @@ delivered. Then:
 
 ## When stuck
 
-Live API docs: https://sendpulse.com/integrations/api/smtp ·
-Knowledge base: https://sendpulse.com/knowledge-base/smtp ·
+Live API docs: https://sendpulse.com/integrations/api/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill ·
+Knowledge base: https://sendpulse.com/knowledge-base/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill ·
 Support: via the dashboard chat. Include the message `id`, timestamp, and full
 JSON response when contacting support.

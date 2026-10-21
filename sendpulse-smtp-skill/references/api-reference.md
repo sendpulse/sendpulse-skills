@@ -3,7 +3,7 @@
 Base URL: `https://api.sendpulse.com`
 Auth: `Authorization: Bearer <token>` on every request (see quickstart for the
 OAuth flow). Content type: `application/json`.
-Live documentation (source of truth): https://sendpulse.com/integrations/api/smtp
+Live documentation (source of truth): https://sendpulse.com/integrations/api/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill
 
 ## Authorization
 

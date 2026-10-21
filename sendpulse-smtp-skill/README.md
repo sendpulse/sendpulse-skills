@@ -2,7 +2,7 @@
 
 An AI skill that teaches any LLM assistant (Claude, ChatGPT, Cursor, Gemini,
 Copilot, …) to build **correct, deliverable email integrations with
-[SendPulse SMTP](https://sendpulse.com/features/smtp)** — REST API and classic
+[SendPulse SMTP](https://sendpulse.com/features/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill)** — REST API and classic
 SMTP relay — and to follow email best practices while doing it.
 
 ## What it gives your AI assistant
@@ -73,7 +73,7 @@ moderation), a verified sender on your own domain, and API `ID`/`Secret` from
 Semantic versioning; the current version lives in `VERSION` and in the
 `SKILL.md` frontmatter (keep them in sync). Log changes in
 [CHANGELOG.md](CHANGELOG.md). When SendPulse API documentation at
-https://sendpulse.com/integrations/api/smtp changes, this skill should follow —
+https://sendpulse.com/integrations/api/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill changes, this skill should follow —
 PRs welcome.
 
 ## License

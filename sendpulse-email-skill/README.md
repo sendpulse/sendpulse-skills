@@ -2,10 +2,10 @@
 
 An AI skill that teaches any LLM assistant (Claude, ChatGPT, Cursor, Gemini,
 Copilot, …) to run **email marketing campaigns with
-[SendPulse Email Service](https://sendpulse.com/features/email)** — address books,
+[SendPulse Email Service](https://sendpulse.com/features/email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill)** — address books,
 subscribers, segmentation, campaign creation and scheduling, and campaign
 analytics — via the dashboard and the
-[bulk-email API](https://sendpulse.com/integrations/api/bulk-email).
+[bulk-email API](https://sendpulse.com/integrations/api/bulk-email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill).
 
 ## The SendPulse skill family
 
@@ -92,7 +92,7 @@ rest.
 
 Semantic versioning; the current version lives in `VERSION` and the `SKILL.md`
 frontmatter (keep in sync). Log changes in [CHANGELOG.md](CHANGELOG.md). When the
-API documentation at https://sendpulse.com/integrations/api/bulk-email changes,
+API documentation at https://sendpulse.com/integrations/api/bulk-email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill changes,
 this skill should follow — PRs welcome.
 
 ## License
