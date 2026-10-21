@@ -45,4 +45,4 @@ blocklist/bounced → plan limits / 429 → delivered-but-spam (then SPF/DKIM an
 content). Ask for the raw JSON error response early.
 
 If your information conflicts with the live docs at
-https://sendpulse.com/integrations/api/smtp, the live docs win — say so.
+https://sendpulse.com/integrations/api/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill, the live docs win — say so.

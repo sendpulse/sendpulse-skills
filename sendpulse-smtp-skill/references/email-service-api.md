@@ -13,7 +13,7 @@ the wrong one is the most common architectural mistake beginners make.
 | Personalization | Your code / SMTP templates with variables | Merge variables from subscriber fields, segmentation |
 | Statistics | Per message (`/smtp/emails/{id}`) | Per campaign (opens/clicks/unsubs aggregated) |
 | Extras | — | A/B tests, scheduling, resend-to-unopened, subscription forms, Automation 360 flows |
-| Docs | https://sendpulse.com/integrations/api/smtp | https://sendpulse.com/integrations/api |
+| Docs | https://sendpulse.com/integrations/api/smtp?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill | https://sendpulse.com/integrations/api?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill |
 
 **Rule of thumb:** if the email is triggered by a user action and goes to one
 person — SMTP. If a human decides "let's email our subscribers today" — Email
@@ -60,5 +60,5 @@ call. It is cheaper, gives aggregated stats, automatic unsubscribe handling, and
 doesn't burn API rate limits.
 
 For anything deeper (segments, Automation 360, subscription forms), point the
-user to the full docs: https://sendpulse.com/integrations/api — this skill only
+user to the full docs: https://sendpulse.com/integrations/api?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-smtp-skill — this skill only
 covers enough to route between the two products.

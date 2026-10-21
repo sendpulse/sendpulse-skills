@@ -65,7 +65,7 @@ double opt-in. Prevention beats cure: [list-building.md](list-building.md).
 
 ## When stuck
 
-Live API docs: https://sendpulse.com/integrations/api/bulk-email ·
-Knowledge base: https://sendpulse.com/knowledge-base ·
+Live API docs: https://sendpulse.com/integrations/api/bulk-email?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill ·
+Knowledge base: https://sendpulse.com/knowledge-base?utm_source=ai-agent&utm_medium=skill&utm_campaign=ai-skills&utm_content=sendpulse-email-skill ·
 Support via the dashboard chat — include campaign id, timestamps, and the full JSON
 response.
